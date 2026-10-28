@@ -366,3 +366,39 @@ h1,h2,h3,.brand{font-family:Manrope,system-ui,sans-serif}
 .profile-retry-button{border:0;padding:2px 0;background:none;color:#00538f;font:inherit;font-size:10px;font-weight:700;text-decoration:underline;cursor:pointer}
 .clinic-table-live{min-width:1220px}
 @media(max-width:430px){.booking-personal-fields{padding:14px}.booking-identity-grid{grid-template-columns:1fr}.booking-personal-heading h3{font-size:15px}}
+
+/* Personal profile contact card */
+.profile-card{padding:0!important;overflow:hidden;background:#fff;border:1px solid #dce9f3;border-radius:12px;box-shadow:0 12px 30px rgba(18,59,100,.055)}
+.profile-card-heading{display:grid;grid-template-columns:44px minmax(0,1fr) auto;align-items:center;gap:12px;padding:19px 20px 16px;background:linear-gradient(125deg,#eff8fe 0%,#f9fcff 72%,#e7f5fc 100%);border-bottom:1px solid #e1eef7}
+.profile-card-avatar{width:42px;height:42px;display:grid;place-items:center;border:1px solid #cbe4f4;border-radius:12px;background:#fff;color:#0877b8;box-shadow:0 4px 12px rgba(18,59,100,.06)}
+.profile-card-title{min-width:0}
+.profile-card-title .section-kicker{font-size:8px;color:#0877b8}
+.profile-card-title h2{margin:4px 0 2px;color:#123b64;font-family:Manrope,system-ui,sans-serif;font-size:17px;letter-spacing:-.45px}
+.profile-card-title p{margin:0;color:#5d7488;font-size:10px;line-height:1.5}
+.profile-private-badge{display:inline-flex;align-items:center;gap:5px;padding:6px 8px;border:1px solid #cfe5f3;border-radius:20px;background:#fff;color:#176b9d;font-size:9px;font-weight:700;white-space:nowrap}
+.profile-account-email{display:grid;grid-template-columns:30px minmax(0,1fr) 20px;align-items:center;gap:10px;margin:15px 18px 0;padding:11px 12px;border:1px solid #dfedf6;border-radius:8px;background:#f8fbfe}
+.profile-email-icon{width:29px;height:29px;display:grid;place-items:center;border-radius:8px;background:#e7f4fc;color:#0877b8}
+.profile-account-email>div{min-width:0;display:flex;flex-direction:column;gap:3px}
+.profile-account-email small{color:#71869a;font-size:9px}
+.profile-account-email strong{overflow:hidden;color:#174766;font-size:11px;font-weight:700;text-overflow:ellipsis;white-space:nowrap}
+.profile-email-lock{display:grid;place-items:center;color:#4e9b84}
+.profile-form{display:flex;flex-direction:column;gap:13px;padding:17px 18px 18px}
+.profile-form label{display:flex;flex-direction:column;gap:7px;color:#254a68;font-size:10px;font-weight:700}
+.profile-field-heading{display:flex;align-items:center;gap:6px;color:#315974}
+.profile-field-heading>svg{color:#1384b8}
+.profile-optional{margin-left:auto;color:#74899a;font-size:9px;font-weight:500}
+.profile-form input{width:100%;min-height:43px;padding:0 12px;border:1px solid #d3e2ec;border-radius:7px;background:#fff;color:#123b64;font:inherit;font-size:12px;transition:border-color .18s,box-shadow .18s,background .18s}
+.profile-form input::placeholder{color:#9baebc}
+.profile-form input:hover{border-color:#a8cfe5}
+.profile-form input:focus{outline:0;border-color:#1687b5;background:#fcfeff;box-shadow:0 0 0 3px rgba(88,188,235,.18)}
+.profile-security-note{display:flex;align-items:flex-start;gap:8px;margin-top:1px;padding:10px;border-radius:7px;background:#f0f8fd;color:#4b6c83;font-size:9px;line-height:1.55}
+.profile-security-note svg{flex:none;margin-top:1px;color:#1687b5}
+.profile-save-button{min-height:43px;display:flex;align-items:center;justify-content:center;gap:8px;padding:0 14px;border:1px solid #0563a5;border-radius:7px;background:linear-gradient(110deg,#0877b8,#005fae);color:#fff;font:inherit;font-size:11px;font-weight:700;cursor:pointer;box-shadow:0 6px 14px rgba(0,95,174,.16);transition:transform .18s,box-shadow .18s,filter .18s}
+.profile-save-button:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 9px 18px rgba(0,95,174,.22);filter:brightness(1.04)}
+.profile-save-button:focus-visible{outline:3px solid rgba(88,188,235,.45);outline-offset:2px}
+.profile-save-button:disabled{opacity:.7;cursor:wait}
+.profile-save-spinner{animation:profile-save-spin .8s linear infinite}
+@keyframes profile-save-spin{to{transform:rotate(360deg)}}
+@media(max-width:760px){.profile-card-heading{padding:16px 16px 14px}.profile-account-email{margin:13px 15px 0}.profile-form{padding:15px}}
+@media(max-width:390px){.profile-card-heading{grid-template-columns:40px minmax(0,1fr);gap:10px}.profile-card-avatar{width:39px;height:39px}.profile-private-badge{grid-column:2;justify-self:start;margin-top:-4px}.profile-account-email{margin-top:11px}}
+@media(prefers-reduced-motion:reduce){.profile-save-spinner{animation:none}}

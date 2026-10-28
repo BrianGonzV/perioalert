@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState, type ChangeEvent, type CSSPropert
 import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom'
 import {
   Activity, ArrowRight, ArrowUpRight, CalendarDays, Check, CheckCircle2,
-  Clock3, ImagePlus, LogOut, MapPin, Plus, ShieldCheck, Sparkles, Trash2, Users, X,
+  Clock3, ImagePlus, LoaderCircle, LogOut, Mail, MapPin, Phone, Plus, ShieldCheck, Sparkles, Trash2, UserRound, Users, X,
 } from 'lucide-react'
 import { useAuth } from './lib/auth'
 import { supabase } from './lib/supabase'
@@ -169,6 +169,7 @@ function LivePatientDashboard({ userId, email }: { userId: string; email: string
   const [label, setLabel] = useState('')
   const [time, setTime] = useState('20:30')
   const [loading, setLoading] = useState(true)
+  const [profileSaving, setProfileSaving] = useState(false)
   const [error, setError] = useState('')
   const [notice, setNotice] = useState('')
   const today = todayLocal()
@@ -228,11 +229,24 @@ function LivePatientDashboard({ userId, email }: { userId: string; email: string
   async function saveProfile(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     if (!supabase) return
-    const { data, error: profileError } = await supabase.from('profiles').update({ full_name: profileName.trim(), phone: profilePhone.trim() || null }).eq('id', userId).select().single()
-    if (profileError) setError(profileError.message)
-    else {
+    const trimmedName = profileName.trim()
+    const trimmedPhone = profilePhone.trim()
+    if (trimmedName.length < 2 || trimmedName.length > 120) {
+      setError('Escribe tu nombre completo (entre 2 y 120 caracteres).')
+      return
+    }
+    setError('')
+    setNotice('')
+    setProfileSaving(true)
+    try {
+      const { data, error: profileError } = await supabase.from('profiles').update({ full_name: trimmedName, phone: trimmedPhone || null }).eq('id', userId).select().single()
+      if (profileError) throw profileError
       setProfile(data as PatientProfile)
-      setNotice('Datos del perfil actualizados.')
+      setNotice('Tus datos de contacto se guardaron correctamente.')
+    } catch {
+      setError('No pudimos guardar tus datos de contacto. Comprueba tu conexión e inténtalo de nuevo.')
+    } finally {
+      setProfileSaving(false)
     }
   }
 
@@ -241,7 +255,20 @@ function LivePatientDashboard({ userId, email }: { userId: string; email: string
   return (
     <div className="content-wrap portal-page dashboard-page"><div className="dashboard-heading"><div><span className="section-kicker">PORTAL DEL PACIENTE</span><h1>Hola, {displayName}.</h1><p>Tu información está asociada a tu cuenta.</p></div><span className="secure-chip"><ShieldCheck size={16} /> Sesión privada</span></div>
       {error && <FormMessage kind="error">{error}</FormMessage>}{notice && <FormMessage>{notice}</FormMessage>}
-      {loading ? <div className="loading-panel">Cargando tu información…</div> : <div className="dashboard-grid"><section className="dashboard-main"><article className="today-card"><div className="today-card-head"><div><span className="section-kicker">TU CUIDADO DE HOY</span><h2>¿Cómo va tu rutina?</h2></div><span className="progress-ring" style={{ '--progress': `${checked * 33.333}%` } as CSSProperties}><span>{checked}/3</span></span></div><div className="today-checks"><HabitCheck label="Cepillado de la mañana" done={Boolean(log?.brushed_morning)} onChange={() => void toggleLog('brushed_morning')} /><HabitCheck label="Limpieza entre los dientes" done={Boolean(log?.cleaned_between_teeth)} onChange={() => void toggleLog('cleaned_between_teeth')} /><HabitCheck label="Cepillado de la noche" done={Boolean(log?.brushed_evening)} onChange={() => void toggleLog('brushed_evening')} /></div><p className="card-footnote">Marca solo los hábitos que realizaste. Puedes editarlos durante el día.</p></article><article className="week-card"><div className="card-heading"><div><span className="section-kicker">PRÓXIMOS PASOS</span><h2>Tus citas</h2></div><CalendarDays size={18} /></div>{requests.length ? requests.map((request) => <div className="request-row" key={request.id}><span className={`request-status status-${request.status}`} /><span>{formatClinicDate(request.requested_date, { day: 'numeric', month: 'long' })}{request.requested_time ? ` · ${request.requested_time.slice(0, 5)}` : ' · hora por confirmar'}</span><span>{request.status === 'requested' ? 'Pendiente de confirmar' : request.status === 'confirmed' ? 'Confirmada por la clínica' : request.status}</span></div>) : <p className="empty-copy">Todavía no tienes solicitudes de cita.</p>}<Link to="/citas" className="side-link">Solicitar una cita <ArrowRight size={15} /></Link></article></section><aside className="dashboard-side"><article className="side-card reminder-card"><div className="card-heading"><div><span className="section-kicker">TUS RECORDATORIOS</span><h2>Momentos para ti</h2></div><Clock3 size={19} /></div>{reminders.length ? reminders.map((item) => <div className="reminder-row" key={item.id}><span className="reminder-time">{item.reminder_time.slice(0, 5)}</span><span className="reminder-label">{item.label}</span><button className="icon-button" type="button" aria-label={`Eliminar ${item.label}`} onClick={() => void removeReminder(item.id)}><Trash2 size={15} /></button></div>) : <p className="empty-copy">Aún no creaste recordatorios.</p>}<form className="reminder-form" onSubmit={addReminder}><input aria-label="Nombre del recordatorio" maxLength={80} placeholder="Ej. Rutina de noche" value={label} onChange={(event) => setLabel(event.target.value)} required /><input aria-label="Hora del recordatorio" type="time" value={time} onChange={(event) => setTime(event.target.value)} required /><button className="add-reminder-button" type="submit"><Plus size={16} /> Añadir</button></form><p className="card-footnote">Los horarios se guardan; aún no envían notificaciones.</p></article><article className="next-visit-card"><span className="section-kicker">ORIENTACIÓN PROFESIONAL</span><h2>¿Necesitas una revisión?</h2><p>Envía una preferencia de fecha para que la clínica la evalúe. La solicitud no es una cita confirmada.</p><Link to="/citas" className="side-link">Solicitar cita <ArrowRight size={15} /></Link></article><article className="side-card profile-card"><div className="card-heading"><div><span className="section-kicker">TU PERFIL</span><h2>Datos de contacto</h2></div></div><form onSubmit={saveProfile}><label>Nombre<input autoComplete="name" maxLength={120} value={profileName} onChange={(event) => setProfileName(event.target.value)} required /></label><label>Teléfono (opcional)<input autoComplete="tel" maxLength={32} type="tel" value={profilePhone} onChange={(event) => setProfilePhone(event.target.value)} /></label><button className="add-reminder-button" type="submit"><Check size={15} /> Guardar perfil</button></form></article></aside></div>}
+      {loading ? <div className="loading-panel">Cargando tu información…</div> : <div className="dashboard-grid"><section className="dashboard-main"><article className="today-card"><div className="today-card-head"><div><span className="section-kicker">TU CUIDADO DE HOY</span><h2>¿Cómo va tu rutina?</h2></div><span className="progress-ring" style={{ '--progress': `${checked * 33.333}%` } as CSSProperties}><span>{checked}/3</span></span></div><div className="today-checks"><HabitCheck label="Cepillado de la mañana" done={Boolean(log?.brushed_morning)} onChange={() => void toggleLog('brushed_morning')} /><HabitCheck label="Limpieza entre los dientes" done={Boolean(log?.cleaned_between_teeth)} onChange={() => void toggleLog('cleaned_between_teeth')} /><HabitCheck label="Cepillado de la noche" done={Boolean(log?.brushed_evening)} onChange={() => void toggleLog('brushed_evening')} /></div><p className="card-footnote">Marca solo los hábitos que realizaste. Puedes editarlos durante el día.</p></article><article className="week-card"><div className="card-heading"><div><span className="section-kicker">PRÓXIMOS PASOS</span><h2>Tus citas</h2></div><CalendarDays size={18} /></div>{requests.length ? requests.map((request) => <div className="request-row" key={request.id}><span className={`request-status status-${request.status}`} /><span>{formatClinicDate(request.requested_date, { day: 'numeric', month: 'long' })}{request.requested_time ? ` · ${request.requested_time.slice(0, 5)}` : ' · hora por confirmar'}</span><span>{request.status === 'requested' ? 'Pendiente de confirmar' : request.status === 'confirmed' ? 'Confirmada por la clínica' : request.status}</span></div>) : <p className="empty-copy">Todavía no tienes solicitudes de cita.</p>}<Link to="/citas" className="side-link">Solicitar una cita <ArrowRight size={15} /></Link></article></section><aside className="dashboard-side"><article className="side-card reminder-card"><div className="card-heading"><div><span className="section-kicker">TUS RECORDATORIOS</span><h2>Momentos para ti</h2></div><Clock3 size={19} /></div>{reminders.length ? reminders.map((item) => <div className="reminder-row" key={item.id}><span className="reminder-time">{item.reminder_time.slice(0, 5)}</span><span className="reminder-label">{item.label}</span><button className="icon-button" type="button" aria-label={`Eliminar ${item.label}`} onClick={() => void removeReminder(item.id)}><Trash2 size={15} /></button></div>) : <p className="empty-copy">Aún no creaste recordatorios.</p>}<form className="reminder-form" onSubmit={addReminder}><input aria-label="Nombre del recordatorio" maxLength={80} placeholder="Ej. Rutina de noche" value={label} onChange={(event) => setLabel(event.target.value)} required /><input aria-label="Hora del recordatorio" type="time" value={time} onChange={(event) => setTime(event.target.value)} required /><button className="add-reminder-button" type="submit"><Plus size={16} /> Añadir</button></form><p className="card-footnote">Los horarios se guardan; aún no envían notificaciones.</p></article><article className="next-visit-card"><span className="section-kicker">ORIENTACIÓN PROFESIONAL</span><h2>¿Necesitas una revisión?</h2><p>Envía una preferencia de fecha para que la clínica la evalúe. La solicitud no es una cita confirmada.</p><Link to="/citas" className="side-link">Solicitar cita <ArrowRight size={15} /></Link></article><article className="side-card profile-card">
+  <div className="profile-card-heading">
+    <span className="profile-card-avatar"><UserRound size={20} /></span>
+    <div className="profile-card-title"><span className="section-kicker">TU ESPACIO PERSONAL</span><h2>Datos de contacto</h2><p>Revisa cómo podemos comunicarnos contigo.</p></div>
+    <span className="profile-private-badge"><ShieldCheck size={14} />Privado</span>
+  </div>
+  <div className="profile-account-email"><span className="profile-email-icon"><Mail size={16} /></span><div><small>Correo de acceso</small><strong title={email}>{email}</strong></div><span className="profile-email-lock"><ShieldCheck size={15} /></span></div>
+  <form className="profile-form" onSubmit={saveProfile}>
+    <label htmlFor="profile-full-name"><span className="profile-field-heading"><UserRound size={14} /> Nombre completo</span><input id="profile-full-name" autoComplete="name" minLength={2} maxLength={120} value={profileName} onChange={(event) => setProfileName(event.target.value)} placeholder="Tu nombre y apellidos" required /></label>
+    <label htmlFor="profile-phone"><span className="profile-field-heading"><Phone size={14} /> Teléfono <span className="profile-optional">Opcional</span></span><input id="profile-phone" autoComplete="tel" maxLength={32} type="tel" value={profilePhone} onChange={(event) => setProfilePhone(event.target.value)} placeholder="+51 900 000 000" /></label>
+    <div className="profile-security-note"><ShieldCheck size={15} /><span>Tu información solo es visible para ti y el personal autorizado de la clínica. Para una cita, puedes indicar un correo de confirmación distinto.</span></div>
+    <button className="profile-save-button" type="submit" disabled={profileSaving}>{profileSaving ? <><LoaderCircle size={16} className="profile-save-spinner" />Guardando…</> : <><Check size={16} />Guardar datos de contacto</>}</button>
+  </form>
+</article></aside></div>}
     </div>
   )
 }

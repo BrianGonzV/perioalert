@@ -1,0 +1,4 @@
+project_id = "perioalert"
+
+[functions.send-appointment-confirmation]
+verify_jwt = true

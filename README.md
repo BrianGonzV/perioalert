@@ -1,62 +1,41 @@
 # Perioalert
 
-Primera versión pública de una plataforma educativa para el cuidado periodontal. Está hecha con React, TypeScript y Vite. Esta entrega incluye solo contenido educativo público; aún no guarda datos ni gestiona cuentas o citas.
+Plataforma educativa periodontal en React, TypeScript y Vite. Incluye páginas públicas, registro e inicio de sesión Supabase, portal de paciente, agenda con horarios, solicitudes con nombre, edad, DNI opcional, correo de confirmación, descripción y fotos privadas, y panel clínico.
 
-## Ejecutar en tu computadora
-
-1. Instala Node.js LTS desde [nodejs.org](https://nodejs.org/) y Git desde [git-scm.com](https://git-scm.com/).
-2. Abre esta carpeta en VS Code.
-3. Abre **Terminal → New Terminal**.
-4. Ejecuta:
-
-   ```bash
-   npm install
-   npm run dev
-   ```
-
-5. Abre la dirección local que aparece en la terminal (normalmente `http://localhost:5173`). Para detener el servidor, pulsa `Ctrl+C`.
-
-Antes de publicar, comprueba la compilación:
+## Desarrollo local
 
 ```bash
-npm run build
+npm install
+npm run dev
 ```
 
-## Publicar en GitHub
+Sin variables Supabase, el portal de paciente y el panel clínico muestran ejemplos ficticios etiquetados como **DEMO**. No se guardan en la base de datos. Para validar la compilación ejecuta `npm run build`.
 
-1. Crea una cuenta en [github.com](https://github.com/) e inicia sesión.
-2. Pulsa **New repository**. Escribe `perioalert`, elige **Public** o **Private** y crea el repositorio **sin** README, `.gitignore` ni licencia (ya existen en este proyecto).
-3. En la terminal de VS Code, desde esta carpeta, ejecuta estos comandos, reemplazando `TU-USUARIO` por tu nombre de usuario de GitHub:
+## Conectar Supabase
 
-   ```bash
-   git init
-   git add .
-   git commit -m "Crear primera versión de Perioalert"
-   git branch -M main
-   git remote add origin https://github.com/TU-USUARIO/perioalert.git
-   git push -u origin main
-   ```
+Sigue los pasos completos en [supabase/README.md](supabase/README.md). La migración está en `supabase/migrations/` y el ejemplo para autorizar al primer administrador en `supabase/bootstrap_admin.sql`.
 
-4. GitHub puede pedirte iniciar sesión en el navegador. Al terminar, actualiza el repositorio en GitHub y confirma que ves los archivos.
+Variables locales requeridas después de crear el proyecto:
 
-Si Git te dice que falta `user.name` o `user.email`, configura el nombre y correo que quieras asociar a tus commits:
+```dotenv
+VITE_SUPABASE_URL=
+VITE_SUPABASE_PUBLISHABLE_KEY=
+```
+
+Nunca uses `service_role` en el frontend. Los ejemplos demo son ficticios; no añadas datos de pacientes al repositorio.
+
+Ejecuta las cinco migraciones en orden; en una base ya existente, aplica también `202610280004_appointment_patient_identity.sql` y `202610280005_appointment_confirmation_email.sql` en Supabase SQL Editor. La quinta habilita el correo de destino de la confirmación. Despliega `send-appointment-confirmation` y configura Resend en los secretos de Supabase según la guía. Sin ese proveedor configurado, la cita se guarda y la pantalla informa que el correo no se pudo enviar.
+
+## Publicar
 
 ```bash
-git config --global user.name "Tu nombre"
-git config --global user.email "tu-correo@example.com"
+git add .
+git commit -m "Conectar portal Perioalert con Supabase"
+git push
 ```
 
-## Publicar en Vercel
+Al estar conectado a GitHub, Vercel desplegará el commit. Configura también las dos variables `VITE_SUPABASE_*` en **Vercel → Project → Settings → Environment Variables** y vuelve a desplegar para activar la conexión alojada. `vercel.json` configura las rutas directas.
 
-1. Entra en [vercel.com](https://vercel.com/) y regístrate o inicia sesión con GitHub.
-2. Pulsa **Add New… → Project** y autoriza el acceso al repositorio `perioalert`.
-3. Selecciona el repositorio y pulsa **Import**.
-4. Vercel detectará Vite. Revisa que el comando de compilación sea `npm run build` y la carpeta de salida `dist`; normalmente los detecta automáticamente.
-5. Pulsa **Deploy**. Cuando termine, abre el enlace `*.vercel.app` para ver la web publicada.
-6. En adelante, cada `git push` a `main` hará que Vercel vuelva a desplegar la página. Las ramas de trabajo también pueden generar enlaces de vista previa.
+## Alcance del prototipo
 
-## Antes de habilitar cuentas o citas
-
-No hay claves ni conexión de Supabase en este repositorio. Para implementar autenticación, recordatorios, citas y administración hace falta crear un proyecto Supabase y definir datos reales de la clínica, textos de consentimiento y disponibilidad. Las claves públicas de frontend se configuran como variables de entorno en Vercel; nunca se debe incluir una clave `service_role` en el frontend ni subir archivos `.env` a GitHub.
-
-La información de esta web es educativa y no reemplaza una evaluación odontológica.
+Los perfiles, hábitos, recordatorios y solicitudes se guardan con RLS por usuario. La agenda ofrece turnos de 30 minutos y bloquea duplicados. El nombre y la edad se piden al reservar; el DNI de ocho dígitos es opcional y solo se muestra al paciente y al personal autorizado. Las fotos se guardan en un bucket privado. La clínica, su ubicación y sus horarios son de demostración. Reemplázalos y confirma el aviso de privacidad, la necesidad de cada dato, el consentimiento, los contactos y las reglas operativas antes de recibir datos reales.

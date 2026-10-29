@@ -3,9 +3,10 @@ import { Link, NavLink, Route, Routes, useLocation } from 'react-router-dom'
 import {
   ArrowDownRight, ArrowRight, ArrowUpRight, BookOpen, Brush, CalendarDays, Check, ChevronDown,
   CircleAlert, Clock3, HeartHandshake, Menu, Pause, Play, RotateCcw, ShieldCheck,
-  Sparkles, Stethoscope, X,
+  MapPin, Sparkles, Stethoscope, X,
 } from 'lucide-react'
 import { AccountPage, AppointmentPage, ClinicPage, PatientPage, SignOutButton } from './Portal'
+import { PerioBotPage, PerioReminderScheduler } from './PerioBot'
 import { useAuth } from './lib/auth'
 
 const navItems = [
@@ -14,6 +15,7 @@ const navItems = [
   { to: '/senales', label: 'Señales de alerta' },
   { to: '/citas', label: 'Citas' },
   { to: '/preguntas', label: 'Preguntas frecuentes' },
+  { to: '/periobot', label: 'PerioBot' },
 ]
 
 function HeroPhoto() {
@@ -237,7 +239,7 @@ function ContactPage() {
   return (
     <div className="content-wrap inner-page contact-page">
       <PageHeading kicker="ACOMPAÑAMIENTO PROFESIONAL" title="Tu salud bucal merece atención." subtitle="La orientación de un profesional ayuda a responder las preguntas sobre tu caso y definir los siguientes pasos." />
-      <div className="contact-panel"><figure className="contact-photo"><img src="/images/dental-consultation.jpg" alt="Profesional dental explica una atención a una paciente" loading="lazy" /><figcaption>Una consulta empieza con una conversación</figcaption></figure><div className="contact-panel-copy"><span className="section-kicker">ATENCIÓN EN TRUJILLO · DATOS EN CONFIGURACIÓN</span><h2>Tu salud bucal merece atención.</h2><p>Perioalert permite reservar un horario y enviar una consulta en línea. La dirección y los canales oficiales de la clínica todavía deben configurarse; verifica esos datos con tu profesional antes de desplazarte.</p><p className="contact-setup-note"><ShieldCheck size={17} /> Los horarios se confirman en la agenda digital. La ubicación física de atención no está configurada aún.</p><Link className="text-link" to="/citas">Ver horarios disponibles <ArrowRight size={16} /></Link></div></div>
+      <div className="contact-panel"><figure className="contact-photo"><img src="/images/dental-consultation.jpg" alt="Profesional dental explica una atención a una paciente" loading="lazy" /><figcaption>Una consulta empieza con una conversación</figcaption></figure><div className="contact-panel-copy"><span className="section-kicker">UPAO · TRUJILLO</span><h2>Encuentra la universidad.</h2><p>Consulta cómo llegar a la Universidad Privada Antenor Orrego en Trujillo. La ubicación en el mapa corresponde a la universidad, no confirma una sede de atención clínica.</p><p className="contact-setup-note"><MapPin size={17} /> Universidad Privada Antenor Orrego, Av. América Sur 3145, Trujillo.</p><a className="button button-primary" href="https://www.google.com/maps/search/?api=1&query=Universidad+Privada+Antenor+Orrego+Trujillo+Peru" target="_blank" rel="noreferrer">Ver ubicación en Maps <ArrowUpRight size={16} /></a><div style={{ marginTop: 18 }}><Link className="text-link" to="/citas">Ver horarios disponibles <ArrowRight size={16} /></Link></div></div></div>
     </div>
   )
 }
@@ -285,6 +287,7 @@ function SiteLayout() {
       '/higiene': 'Higiene diaria · Perioalert',
       '/senales': 'Señales de alerta · Perioalert',
       '/preguntas': 'Preguntas frecuentes · Perioalert',
+      '/periobot': 'PerioBot · Perioalert',
       '/contacto': 'Contacto · Perioalert',
       '/privacidad': 'Aviso de privacidad · Perioalert',
       '/cuenta': 'Mi espacio · Perioalert',
@@ -352,6 +355,7 @@ function SiteLayout() {
   return (
     <>
       <a className="skip-link" href="#contenido">Ir al contenido</a>
+      <PerioReminderScheduler />
       <header className="site-header">
         <div className="nav-wrap">
           <Link className="brand" to="/" aria-label="Perioalert, inicio"><img className="brand-logo" src="/images/perioalert-logo-horizontal.png" alt="" /></Link>
@@ -372,6 +376,7 @@ function SiteLayout() {
           <Route path="/higiene" element={<HygienePage />} />
           <Route path="/senales" element={<SignalsPage />} />
           <Route path="/preguntas" element={<QuestionsPage />} />
+          <Route path="/periobot" element={<PerioBotPage />} />
           <Route path="/contacto" element={<ContactPage />} />
           <Route path="/privacidad" element={<PrivacyPage />} />
           <Route path="/cuenta" element={<AccountPage />} />

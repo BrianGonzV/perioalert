@@ -682,3 +682,8 @@ h1,h2,h3,.brand{font-family:Manrope,system-ui,sans-serif}
 }
 .topic-featured{background:var(--card-surface);color:#123f49}
 .topic-featured .topic-icon{color:#064b54;background:#d1e8ea;border-color:var(--card-border)}
+.brand-logo{display:block;width:184px;height:auto;max-height:52px;object-fit:contain}
+.site-header .brand{padding:4px 8px;border-radius:7px;background:var(--card-surface)}
+.footer-brand{width:max-content;padding:4px 8px;border-radius:7px;background:var(--card-surface)}
+.footer-brand .brand-logo{width:178px}
+@media(max-width:760px){.brand-logo{width:156px;max-height:44px}}

@@ -19,6 +19,19 @@ const todayLocal = () => {
 const MAX_APPOINTMENT_PHOTOS = 3
 const MAX_APPOINTMENT_PHOTO_BYTES = 5 * 1024 * 1024
 const ALLOWED_APPOINTMENT_PHOTO_TYPES = ['image/jpeg', 'image/png', 'image/webp']
+type AppointmentPrefill = { reason: 'checkup' | 'bleeding' | 'sensitivity' | 'other'; patientNote: string }
+
+function readAppointmentPrefill(state: unknown): AppointmentPrefill | undefined {
+  if (!state || typeof state !== 'object') return undefined
+  const value = (state as { appointmentPrefill?: unknown }).appointmentPrefill
+  if (!value || typeof value !== 'object') return undefined
+  const candidate = value as { reason?: unknown; patientNote?: unknown }
+  if (!['checkup', 'bleeding', 'sensitivity', 'other'].includes(String(candidate.reason))) return undefined
+  return {
+    reason: candidate.reason as AppointmentPrefill['reason'],
+    patientNote: typeof candidate.patientNote === 'string' ? candidate.patientNote.slice(0, 1500) : '',
+  }
+}
 
 function PhotoPreview({ file, onRemove }: { file: File; onRemove: () => void }) {
   const [preview, setPreview] = useState('')
@@ -58,6 +71,10 @@ export function AccountPage() {
   const location = useLocation()
   const navigate = useNavigate()
   const postAuthPath = location.state?.from === '/citas' ? '/citas' : '/mi-salud'
+  const postAuthState = useMemo(() => {
+    const appointmentPrefill = readAppointmentPrefill(location.state)
+    return appointmentPrefill ? { appointmentPrefill } : undefined
+  }, [location.key])
   const recoveryLink = window.location.hash.includes('type=recovery')
   const [mode, setMode] = useState<'login' | 'register' | 'reset' | 'set-password'>(recoveryLink ? 'set-password' : 'login')
   const [fullName, setFullName] = useState('')
@@ -67,7 +84,7 @@ export function AccountPage() {
   const [message, setMessage] = useState('')
   const [isError, setIsError] = useState(false)
 
-  useEffect(() => { if (configured && user && !recoveryLink) navigate(postAuthPath, { replace: true }) }, [configured, user, navigate, recoveryLink, postAuthPath])
+  useEffect(() => { if (configured && user && !recoveryLink) navigate(postAuthPath, { replace: true, state: postAuthState }) }, [configured, user, navigate, recoveryLink, postAuthPath, postAuthState])
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -80,7 +97,7 @@ export function AccountPage() {
         const { data, error } = await supabase.auth.signUp({ email, password, options: { data: { full_name: fullName.trim() } } })
         if (error) throw error
         if (data.session) {
-          navigate(postAuthPath)
+          navigate(postAuthPath, { state: postAuthState })
         } else {
           setMessage('Tu cuenta se creó. Revisa tu correo para confirmarla y después inicia sesión.')
         }
@@ -92,11 +109,11 @@ export function AccountPage() {
         const { error } = await supabase.auth.updateUser({ password })
         if (error) throw error
         window.history.replaceState(null, '', window.location.pathname)
-        navigate(postAuthPath)
+        navigate(postAuthPath, { state: postAuthState })
       } else {
         const { error } = await supabase.auth.signInWithPassword({ email, password })
         if (error) throw error
-        navigate(postAuthPath)
+        navigate(postAuthPath, { state: postAuthState })
       }
     } catch (error) {
       setIsError(true)
@@ -110,7 +127,7 @@ export function AccountPage() {
     <div className="content-wrap portal-page">
       {!configured ? <DemoBanner /> : null}
       <div className="account-layout">
-        <section className="account-story"><span className="section-kicker">TU ESPACIO DE CUIDADO</span><h1>Una rutina que<br />te acompaña.</h1><p>Guarda tus hábitos, crea recordatorios y mantén tus solicitudes de cita en un solo lugar.</p><div className="account-benefit"><span><Check size={15} /></span> Privado para tu cuenta</div><div className="account-benefit"><span><Check size={15} /></span> Seguimiento fácil de tus hábitos</div><div className="account-benefit"><span><Check size={15} /></span> Sin notificaciones médicas automáticas</div><div className="story-orbit" /></section>
+        <section className="account-story"><img className="account-story-photo" src="/images/dental-consultation.jpg" alt="Odontólogo conversa con una paciente antes de su atención" loading="lazy" /><span className="section-kicker">TU ESPACIO DE CUIDADO</span><h1>Una rutina que<br />te acompaña.</h1><p>Guarda tus hábitos, crea recordatorios y mantén tus citas confirmadas en un solo lugar.</p><div className="account-benefit"><span><Check size={15} /></span> Privado para tu cuenta</div><div className="account-benefit"><span><Check size={15} /></span> Seguimiento fácil de tus hábitos</div><div className="account-benefit"><span><Check size={15} /></span> Recordatorios a tu ritmo</div><div className="story-orbit" /></section>
         <section className="account-card">
           <span className="section-kicker">{configured ? 'BIENVENIDO/A' : 'VISTA PREVIA'}</span>
           <h2>{configured ? (mode === 'register' ? 'Crear una cuenta' : mode === 'reset' ? 'Recuperar acceso' : mode === 'set-password' ? 'Elige una contraseña nueva' : 'Iniciar sesión') : 'Tu portal está listo para conectar'}</h2>
@@ -255,7 +272,7 @@ function LivePatientDashboard({ userId, email }: { userId: string; email: string
   return (
     <div className="content-wrap portal-page dashboard-page"><div className="dashboard-heading"><div><span className="section-kicker">PORTAL DEL PACIENTE</span><h1>Hola, {displayName}.</h1><p>Tu información está asociada a tu cuenta.</p></div><span className="secure-chip"><ShieldCheck size={16} /> Sesión privada</span></div>
       {error && <FormMessage kind="error">{error}</FormMessage>}{notice && <FormMessage>{notice}</FormMessage>}
-      {loading ? <div className="loading-panel">Cargando tu información…</div> : <div className="dashboard-grid"><section className="dashboard-main"><article className="today-card"><div className="today-card-head"><div><span className="section-kicker">TU CUIDADO DE HOY</span><h2>¿Cómo va tu rutina?</h2></div><span className="progress-ring" style={{ '--progress': `${checked * 33.333}%` } as CSSProperties}><span>{checked}/3</span></span></div><div className="today-checks"><HabitCheck label="Cepillado de la mañana" done={Boolean(log?.brushed_morning)} onChange={() => void toggleLog('brushed_morning')} /><HabitCheck label="Limpieza entre los dientes" done={Boolean(log?.cleaned_between_teeth)} onChange={() => void toggleLog('cleaned_between_teeth')} /><HabitCheck label="Cepillado de la noche" done={Boolean(log?.brushed_evening)} onChange={() => void toggleLog('brushed_evening')} /></div><p className="card-footnote">Marca solo los hábitos que realizaste. Puedes editarlos durante el día.</p></article><article className="week-card"><div className="card-heading"><div><span className="section-kicker">PRÓXIMOS PASOS</span><h2>Tus citas</h2></div><CalendarDays size={18} /></div>{requests.length ? requests.map((request) => <div className="request-row" key={request.id}><span className={`request-status status-${request.status}`} /><span>{formatClinicDate(request.requested_date, { day: 'numeric', month: 'long' })}{request.requested_time ? ` · ${request.requested_time.slice(0, 5)}` : ' · hora por confirmar'}</span><span>{request.status === 'requested' ? 'Pendiente de confirmar' : request.status === 'confirmed' ? 'Confirmada por la clínica' : request.status}</span></div>) : <p className="empty-copy">Todavía no tienes solicitudes de cita.</p>}<Link to="/citas" className="side-link">Solicitar una cita <ArrowRight size={15} /></Link></article></section><aside className="dashboard-side"><article className="side-card reminder-card"><div className="card-heading"><div><span className="section-kicker">TUS RECORDATORIOS</span><h2>Momentos para ti</h2></div><Clock3 size={19} /></div>{reminders.length ? reminders.map((item) => <div className="reminder-row" key={item.id}><span className="reminder-time">{item.reminder_time.slice(0, 5)}</span><span className="reminder-label">{item.label}</span><button className="icon-button" type="button" aria-label={`Eliminar ${item.label}`} onClick={() => void removeReminder(item.id)}><Trash2 size={15} /></button></div>) : <p className="empty-copy">Aún no creaste recordatorios.</p>}<form className="reminder-form" onSubmit={addReminder}><input aria-label="Nombre del recordatorio" maxLength={80} placeholder="Ej. Rutina de noche" value={label} onChange={(event) => setLabel(event.target.value)} required /><input aria-label="Hora del recordatorio" type="time" value={time} onChange={(event) => setTime(event.target.value)} required /><button className="add-reminder-button" type="submit"><Plus size={16} /> Añadir</button></form><p className="card-footnote">Los horarios se guardan; aún no envían notificaciones.</p></article><article className="next-visit-card"><span className="section-kicker">ORIENTACIÓN PROFESIONAL</span><h2>¿Necesitas una revisión?</h2><p>Envía una preferencia de fecha para que la clínica la evalúe. La solicitud no es una cita confirmada.</p><Link to="/citas" className="side-link">Solicitar cita <ArrowRight size={15} /></Link></article><article className="side-card profile-card">
+      {loading ? <div className="loading-panel">Cargando tu información…</div> : <div className="dashboard-grid"><section className="dashboard-main"><article className="today-card"><div className="today-card-head"><div><span className="section-kicker">TU CUIDADO DE HOY</span><h2>¿Cómo va tu rutina?</h2></div><span className="progress-ring" style={{ '--progress': `${checked * 33.333}%` } as CSSProperties}><span>{checked}/3</span></span></div><div className="today-checks"><HabitCheck label="Cepillado de la mañana" done={Boolean(log?.brushed_morning)} onChange={() => void toggleLog('brushed_morning')} /><HabitCheck label="Limpieza entre los dientes" done={Boolean(log?.cleaned_between_teeth)} onChange={() => void toggleLog('cleaned_between_teeth')} /><HabitCheck label="Cepillado de la noche" done={Boolean(log?.brushed_evening)} onChange={() => void toggleLog('brushed_evening')} /></div><p className="card-footnote">Marca solo los hábitos que realizaste. Puedes editarlos durante el día.</p></article><article className="week-card"><div className="card-heading"><div><span className="section-kicker">PRÓXIMOS PASOS</span><h2>Tus citas</h2></div><CalendarDays size={18} /></div>{requests.length ? requests.map((request) => <div className="request-row" key={request.id}><span className={`request-status status-${request.status}`} /><span>{formatClinicDate(request.requested_date, { day: 'numeric', month: 'long' })}{request.requested_time ? ` · ${request.requested_time.slice(0, 5)}` : ' · hora por confirmar'}</span><span>{request.status === 'requested' ? 'Pendiente · reserva anterior' : request.status === 'confirmed' ? 'Horario reservado automáticamente' : request.status}</span></div>) : <p className="empty-copy">Todavía no tienes citas.</p>}<Link to="/citas" className="side-link">Reservar otro horario <ArrowRight size={15} /></Link></article></section><aside className="dashboard-side"><article className="side-card reminder-card"><div className="card-heading"><div><span className="section-kicker">TUS RECORDATORIOS</span><h2>Momentos para ti</h2></div><Clock3 size={19} /></div>{reminders.length ? reminders.map((item) => <div className="reminder-row" key={item.id}><span className="reminder-time">{item.reminder_time.slice(0, 5)}</span><span className="reminder-label">{item.label}</span><button className="icon-button" type="button" aria-label={`Eliminar ${item.label}`} onClick={() => void removeReminder(item.id)}><Trash2 size={15} /></button></div>) : <p className="empty-copy">Aún no creaste recordatorios.</p>}<form className="reminder-form" onSubmit={addReminder}><input aria-label="Nombre del recordatorio" maxLength={80} placeholder="Ej. Rutina de noche" value={label} onChange={(event) => setLabel(event.target.value)} required /><input aria-label="Hora del recordatorio" type="time" value={time} onChange={(event) => setTime(event.target.value)} required /><button className="add-reminder-button" type="submit"><Plus size={16} /> Añadir</button></form><p className="card-footnote">Los horarios se guardan; aún no envían notificaciones.</p></article><article className="next-visit-card"><span className="section-kicker">ORIENTACIÓN PROFESIONAL</span><h2>¿Necesitas una revisión?</h2><p>Elige una hora disponible; la reserva se confirma automáticamente y llega a tu correo con un PDF.</p><Link to="/citas" className="side-link">Reservar una cita <ArrowRight size={15} /></Link></article><article className="side-card profile-card">
   <div className="profile-card-heading">
     <span className="profile-card-avatar"><UserRound size={20} /></span>
     <div className="profile-card-title"><span className="section-kicker">TU ESPACIO PERSONAL</span><h2>Datos de contacto</h2><p>Revisa cómo podemos comunicarnos contigo.</p></div>
@@ -281,12 +298,12 @@ export function PatientPage() {
   return <LivePatientDashboard key={user.id} userId={user.id} email={user.email ?? ''} />
 }
 
-function AppointmentBooking({ demo, userId, accountEmail }: { demo: boolean; userId?: string; accountEmail?: string }) {
+function AppointmentBooking({ demo, userId, accountEmail, prefill }: { demo: boolean; userId?: string; accountEmail?: string; prefill?: AppointmentPrefill }) {
   const dates = useMemo(() => clinicDates(14), [])
   const seed = useMemo(() => makeDemoSeedBookings(), [])
   const [date, setDate] = useState(dates[0] ?? '')
   const [time, setTime] = useState('')
-  const [reason, setReason] = useState<'checkup' | 'bleeding' | 'sensitivity' | 'other'>('checkup')
+  const [reason, setReason] = useState<AppointmentPrefill['reason']>(() => prefill?.reason ?? 'checkup')
   const [patientName, setPatientName] = useState('')
   const [patientAge, setPatientAge] = useState('')
   const [patientDni, setPatientDni] = useState('')
@@ -295,7 +312,7 @@ function AppointmentBooking({ demo, userId, accountEmail }: { demo: boolean; use
   const [profileReady, setProfileReady] = useState(demo)
   const [profileError, setProfileError] = useState('')
   const [profileRetry, setProfileRetry] = useState(0)
-  const [patientNote, setPatientNote] = useState('')
+  const [patientNote, setPatientNote] = useState(() => prefill?.patientNote ?? '')
   const [photos, setPhotos] = useState<File[]>([])
   const photoInputRef = useRef<HTMLInputElement>(null)
   const [consent, setConsent] = useState(false)
@@ -399,15 +416,28 @@ function AppointmentBooking({ demo, userId, accountEmail }: { demo: boolean; use
   async function sendConfirmationEmail(id: string) {
     if (!supabase || !id) return
     setEmailStatus('sending')
-    setEmailMessage('Enviando el correo de confirmación…')
+    setEmailMessage('Enviando el correo de confirmación y el PDF…')
     try {
       const { data, error: emailError } = await supabase.functions.invoke('send-appointment-confirmation', { body: { requestId: id } })
-      if (emailError || !data?.sent) throw new Error('send failed')
+      if (emailError) {
+        let detail = emailError.message
+        const response = (emailError as { context?: Response }).context
+        if (response) {
+          try {
+            const payload = await response.clone().json() as { error?: unknown }
+            if (typeof payload.error === 'string') detail = payload.error
+          } catch {
+            // Keep the Functions error message when the response is not JSON.
+          }
+        }
+        throw new Error(detail)
+      }
+      if (!data?.sent) throw new Error(typeof data?.error === 'string' ? data.error : 'El proveedor no confirmó el envío del correo.')
       setEmailStatus('sent')
-      setEmailMessage(`Enviamos un correo de recepción a ${confirmationEmail.trim()}.`)
-    } catch {
+      setEmailMessage(`Enviamos la confirmación y el PDF a ${confirmationEmail.trim()}.`)
+    } catch (error) {
       setEmailStatus('failed')
-      setEmailMessage('La solicitud quedó guardada, pero el correo no se envió. Puedes reintentarlo.')
+      setEmailMessage(error instanceof Error ? error.message : 'La cita quedó reservada, pero el correo no se envió. Puedes reintentarlo.')
     }
   }
 
@@ -456,7 +486,7 @@ function AppointmentBooking({ demo, userId, accountEmail }: { demo: boolean; use
         date,
         time,
         reason: reason === 'checkup' ? 'Control preventivo' : reason === 'bleeding' ? 'Sangrado de encías' : reason === 'sensitivity' ? 'Sensibilidad' : 'Otra consulta',
-        status: 'requested',
+        status: 'confirmed',
       }
       writeDemoBookings([...currentBookings, nextBooking])
       setConfirmation(nextBooking)
@@ -484,6 +514,7 @@ function AppointmentBooking({ demo, userId, accountEmail }: { demo: boolean; use
       const result = await supabase.from('appointment_requests').insert({
         id,
         patient_id: userId,
+        status: 'confirmed',
         requested_date: date,
         requested_time: time,
         preferred_period: Number(time.slice(0, 2)) < 13 ? 'morning' : 'afternoon',
@@ -491,9 +522,9 @@ function AppointmentBooking({ demo, userId, accountEmail }: { demo: boolean; use
         patient_note: patientNote.trim() || null,
         confirmation_email: confirmationEmail.trim(),
         consent_accepted_at: acceptedAt,
-        privacy_notice_version: 'v4',
+        privacy_notice_version: 'v5',
         sensitive_data_consent_at: acceptedAt,
-        sensitive_data_notice_version: 'v4',
+        sensitive_data_notice_version: 'v5',
       })
       requestError = result.error
     } catch {
@@ -548,7 +579,7 @@ function AppointmentBooking({ demo, userId, accountEmail }: { demo: boolean; use
       return
     }
 
-    const confirmedRequest: DemoBooking = { id, patient: 'Tú', date, time, reason: 'Solicitud enviada', status: 'requested' }
+    const confirmedRequest: DemoBooking = { id, patient: 'Tú', date, time, reason: 'Cita confirmada', status: 'confirmed' }
     setRequestId(id)
     setConfirmation(confirmedRequest)
     setPhotos([])
@@ -572,7 +603,8 @@ function AppointmentBooking({ demo, userId, accountEmail }: { demo: boolean; use
       <div className="booking-intro">
         <span className="section-kicker">{demo ? 'CLÍNICA DE DEMOSTRACIÓN' : 'SOLICITUD DE CITA'}</span>
         <h1>Elige el día y la hora que te convienen.</h1>
-        <p>Solicita una atención en Perioalert Trujillo. La clínica revisará la solicitud y confirmará la cita contigo.</p>
+        <p>Elige un horario libre y quedará reservado automáticamente al enviar tus datos. Recibirás el resumen de la cita en un correo con PDF adjunto.</p>
+        <img className="booking-support-photo" src="/images/dental-consultation.jpg" alt="Profesional dental atiende a una paciente en un consultorio" loading="lazy" />
         <section className="clinic-profile-card" aria-label="Información de la clínica">
           <div className="clinic-profile-heading"><span className="clinic-avatar"><MapPin size={20} /></span><div><strong>Perioalert · Clínica de demostración</strong><span>Trujillo, La Libertad, Perú · ubicación simulada</span></div></div>
           <div className="clinic-info-row"><Clock3 size={16} /><span><b>Lun–Vie</b> 9:00–13:00 y 15:00–18:00<br /><b>Sábado</b> 9:00–13:00 · Domingo cerrado</span></div>
@@ -581,13 +613,13 @@ function AppointmentBooking({ demo, userId, accountEmail }: { demo: boolean; use
         <div className="booking-trust"><ShieldCheck size={17} />{demo ? 'La demo no solicita datos personales ni contacta a la clínica.' : 'Tu solicitud queda asociada a tu cuenta; no incluyas detalles médicos.'}</div>
       </div>
       <form className="booking-card" onSubmit={submit}>
-        <div className="booking-form-heading"><div><span className="section-kicker">{confirmation ? 'RESUMEN' : 'PASO 1 DE 3 · FECHA'}</span><h2>{confirmation ? (demo ? 'Horario reservado en la demo' : 'Solicitud enviada') : 'Selecciona un día'}</h2></div><span className="booking-step">{confirmation ? <CheckCircle2 size={19} /> : <CalendarDays size={19} />}</span></div>
+        <div className="booking-form-heading"><div><span className="section-kicker">{confirmation ? 'RESUMEN' : 'PASO 1 DE 3 · FECHA'}</span><h2>{confirmation ? (demo ? 'Horario reservado en la demo' : 'Cita confirmada') : 'Selecciona un día'}</h2></div><span className="booking-step">{confirmation ? <CheckCircle2 size={19} /> : <CalendarDays size={19} />}</span></div>
         {confirmation ? <div className="booking-confirmation" role="status">
           <span className="confirmation-check"><CheckCircle2 size={23} /></span>
           <strong>{formatClinicDate(confirmation.date, { weekday: 'long', day: 'numeric', month: 'long' })} · {confirmation.time}</strong>
-          <p>{demo ? 'La reserva de prueba se guardó en este navegador y aparecerá en el panel de clínica demo.' : 'Estado: pendiente de confirmación por parte de la clínica.'}</p>
+          <p>{demo ? 'La reserva de prueba se guardó en este navegador y aparecerá en el panel de clínica demo.' : 'Estado: cita confirmada automáticamente y horario reservado en la agenda digital.'}</p>
           {!demo && <div className={`booking-email-notice ${emailStatus === 'failed' ? 'failed' : ''}`} role="status"><span>{emailStatus === 'sent' ? <CheckCircle2 size={16} /> : emailStatus === 'failed' ? <ShieldCheck size={16} /> : <Clock3 size={16} />}{emailMessage}</span>{emailStatus === 'failed' && <button type="button" onClick={() => void sendConfirmationEmail(requestId)}>Reintentar correo</button>}</div>}
-          <button className="button button-secondary full-button" type="button" onClick={clearConfirmation}>Elegir otro horario</button>
+          <button className="button button-secondary full-button" type="button" onClick={clearConfirmation}>{demo ? 'Elegir otro horario' : 'Reservar otra cita'}</button>
         </div> : <>
           <fieldset className="booking-date-fieldset"><legend>Día de atención · hora local de Trujillo</legend><div className="booking-date-grid">{dates.map((option) => <button className={`booking-date-option ${date === option ? 'selected' : ''}`} type="button" key={option} aria-pressed={date === option} onClick={() => { setDate(option); setError('') }}><span>{formatClinicDate(option, { weekday: 'short' })}</span><strong>{formatClinicDate(option, { day: 'numeric' })}</strong><small>{formatClinicDate(option, { month: 'short' })}</small></button>)}</div></fieldset>
           <fieldset className="booking-time-fieldset"><legend><span>Paso 2 · Elige una hora</span><small>{date ? formatClinicDate(date, { weekday: 'long', day: 'numeric', month: 'long' }) : ''}</small></legend>
@@ -609,11 +641,11 @@ function AppointmentBooking({ demo, userId, accountEmail }: { demo: boolean; use
           {!demo ? <>
             <label className="booking-card-label">Cuéntanos cómo te sientes <span className="optional-label">Opcional · hasta 1500 caracteres</span><textarea rows={4} maxLength={1500} value={patientNote} onChange={(event) => setPatientNote(event.target.value)} placeholder="Describe brevemente qué te preocupa o desde cuándo lo notas. Evita incluir datos que no hagan falta." /></label>
             <div className="appointment-upload"><div><strong>Fotos de apoyo</strong><span>Opcional · JPG, PNG o WebP · hasta 3 fotos de 5 MB</span></div><label className="appointment-upload-button"><ImagePlus size={17} />Adjuntar fotos<input ref={photoInputRef} type="file" accept="image/jpeg,image/png,image/webp" multiple onChange={selectPhotos} disabled={photos.length >= MAX_APPOINTMENT_PHOTOS} /></label>{photos.length > 0 && <div className="appointment-photo-list">{photos.map((file, index) => <PhotoPreview key={`${file.name}-${file.lastModified}-${index}`} file={file} onRemove={() => setPhotos((current) => current.filter((_, photoIndex) => photoIndex !== index))} />)}</div>}</div>
-            <label className="consent-check"><input type="checkbox" checked={consent} onChange={(event) => setConsent(event.target.checked)} required /><span>Acepto compartir mi nombre, edad, correo, DNI (si lo proporciono), motivo, descripción y fotos con la clínica para gestionar esta solicitud y enviarme la confirmación al correo indicado. He leído el <Link to="/privacidad" target="_blank" rel="noreferrer">aviso de privacidad</Link>. La cita queda pendiente de confirmación.</span></label>
+            <label className="consent-check"><input type="checkbox" checked={consent} onChange={(event) => setConsent(event.target.checked)} required /><span>Acepto compartir mi nombre, edad, correo, DNI (si lo proporciono), motivo, descripción y fotos con la clínica para reservar el horario. También acepto recibir la confirmación y un PDF con el resumen en el correo indicado. He leído el <Link to="/privacidad" target="_blank" rel="noreferrer">aviso de privacidad</Link>. El PDF no incluye DNI, fotos ni descripción personal.</span></label>
           </> : <div className="private-intake-prompt"><ShieldCheck size={17} /><span>Por seguridad, las fotos y la descripción solo se pueden adjuntar desde una sesión autenticada.</span><Link to="/cuenta">Iniciar sesión o crear cuenta <ArrowRight size={14} /></Link></div>}
           {error && <FormMessage kind="error">{error}</FormMessage>}
-          <button className="button button-primary full-button" type="submit" disabled={busy || loadingSlots || !time || (!demo && (!consent || profileLoading || !profileReady || Boolean(profileError)))}>{busy ? 'Guardando…' : demo ? 'Simular mi cita' : 'Solicitar este horario'} <ArrowRight size={16} /></button>
-          <p className="card-footnote">{demo ? 'Solo se guarda la fecha y la hora ficticias en este navegador.' : 'La solicitud no es una cita confirmada hasta que la clínica responda.'}</p>
+          <button className="button button-primary full-button" type="submit" disabled={busy || loadingSlots || !time || (!demo && (!consent || profileLoading || !profileReady || Boolean(profileError)))}>{busy ? 'Guardando…' : demo ? 'Simular mi cita' : 'Confirmar mi cita'} <ArrowRight size={16} /></button>
+          <p className="booking-status-note">{demo ? 'Solo se guarda la fecha y la hora ficticias en este navegador.' : 'Al enviar, el horario se reserva automáticamente. La dirección física de atención está pendiente de configuración; confirma el lugar con tu profesional antes de desplazarte.'}</p>
         </>}
       </form>
     </div>
@@ -622,13 +654,15 @@ function AppointmentBooking({ demo, userId, accountEmail }: { demo: boolean; use
 
 export function AppointmentPage() {
   const { configured, loading, user } = useAuth()
-  if (!configured) return <AppointmentAccess />
+  const location = useLocation()
+  const prefill = useMemo(() => readAppointmentPrefill(location.state), [location.key])
+  if (!configured) return <AppointmentAccess prefill={prefill} />
   if (loading) return <div className="content-wrap portal-page"><div className="loading-panel">Comprobando sesión…</div></div>
-  if (!user) return <AppointmentAccess />
-  return <AppointmentBooking demo={false} userId={user.id} accountEmail={user.email ?? ''} />
+  if (!user) return <AppointmentAccess prefill={prefill} />
+  return <AppointmentBooking demo={false} userId={user.id} accountEmail={user.email ?? ''} prefill={prefill} />
 }
 
-function AppointmentAccess() {
+function AppointmentAccess({ prefill }: { prefill?: AppointmentPrefill }) {
   const { configured } = useAuth()
   return <div className="content-wrap portal-page appointment-access-page">
     {!configured && <DemoBanner />}
@@ -636,7 +670,7 @@ function AppointmentAccess() {
       <span className="section-kicker">AGENDA PRIVADA</span>
       <h1>Inicia sesión para solicitar una cita.</h1>
       <p>Las solicitudes y los datos que compartas deben quedar asociados a tu cuenta para que puedas consultarlos de forma privada.</p>
-      <Link className="button button-primary" to="/cuenta" state={{ from: '/citas' }}>Iniciar sesión o crear cuenta <ArrowRight size={17} /></Link>
+      <Link className="button button-primary" to="/cuenta" state={{ from: '/citas', ...(prefill ? { appointmentPrefill: prefill } : {}) }}>Iniciar sesión o crear cuenta <ArrowRight size={17} /></Link>
       {!configured && <p className="card-footnote">La conexión de cuentas todavía está en modo demostración.</p>}
     </section>
   </div>
@@ -715,7 +749,7 @@ function LiveClinicDashboard() {
   const visibleRows = useMemo(() => rows.filter((item) => filter === 'all' || item.status === filter), [rows, filter])
   const pending = rows.filter((item) => item.status === 'requested').length
   return <div className="content-wrap portal-page clinic-page">
-    <div className="dashboard-heading"><div><span className="section-kicker">ESPACIO DE CLÍNICA · TRUJILLO</span><h1>Gestión de citas.</h1><p>Revisa horarios, confirma solicitudes y libera citas si hace falta.</p></div><span className="secure-chip"><ShieldCheck size={16} /> Acceso autorizado</span></div>
+    <div className="dashboard-heading"><div><span className="section-kicker">ESPACIO DE CLÍNICA · TRUJILLO</span><h1>Gestión de citas.</h1><p>Las nuevas reservas se confirman automáticamente. Consulta la agenda, completa o libera horarios.</p></div><span className="secure-chip"><ShieldCheck size={16} /> Acceso autorizado</span></div>
     {error && <FormMessage kind="error">{error}</FormMessage>}
     <div className="clinic-stats"><article><span>Solicitudes activas</span><b>{rows.filter((item) => item.status !== 'cancelled').length}</b><small>Horarios ocupados</small></article><article><span>Pendientes</span><b>{pending}</b><small>Esperan confirmación</small></article><article><span>Próximas fechas</span><b>{rows.filter((item) => item.requested_date >= clinicToday()).length}</b><small>Hora local de Trujillo</small></article></div>
     <section className="clinic-table-card">

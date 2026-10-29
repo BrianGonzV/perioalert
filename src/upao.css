@@ -36,25 +36,6 @@ h1,h2,h3,.brand{font-family:Manrope,system-ui,sans-serif}
 .button-primary{background:#005FAE;box-shadow:0 5px 14px rgba(0,95,174,.15)}
 .button-primary:hover{background:#034f8f;box-shadow:0 8px 19px rgba(0,95,174,.22)}
 .text-link{color:#123b64}
-.hero-art{height:540px}
-.art-orbit{background:#e9f4fc;border:1px solid #dcebf7;width:min(494px,98%);right:0}
-.art-orbit:before{border-color:#d2e5f4}
-.art-paper{width:min(424px,87%);height:422px;background:linear-gradient(155deg,#f6fbff 0%,#e3f1fb 100%);border:1px solid #d7e8f4;border-radius:190px 190px 13px 13px;box-shadow:0 26px 65px rgba(0,70,126,.09)}
-.art-label{position:absolute;top:24px;left:50%;transform:translateX(-50%);width:max-content;max-width:calc(100% - 32px);justify-content:center;white-space:nowrap;padding:9px 13px;border:1px solid rgba(182,217,243,.72);border-radius:999px;background:rgba(255,255,255,.78);box-shadow:0 5px 16px rgba(18,59,100,.045);color:#315f81;font-size:9px;letter-spacing:1.25px}
-.art-label svg{color:#58BCEB}
-.tooth-art{display:block;width:96%;max-height:336px;overflow:visible;margin-top:14px;animation:tooth-float 5.8s ease-in-out infinite}
-.tooth-shadow{fill:rgba(14,67,104,.1)}
-.tooth-shape{fill:url(#tooth-enamel);stroke:#005FAE;stroke-width:5;stroke-linejoin:round}
-.tooth-highlight{fill:#fff;opacity:.86}
-.tooth-engraving{fill:none;stroke:#b6d9f3;stroke-width:3;stroke-linecap:round}
-.tooth-glint{fill:none;stroke:#005FAE;stroke-width:3;stroke-linecap:round}
-.tooth-dot{fill:#58BCEB}
-.art-glint{stroke:#58BCEB;fill:none}
-.art-glint:last-child{fill:#58BCEB;stroke:none}
-.art-caption{color:#52748d;font-size:10px}
-.art-caption span{background:#58BCEB}
-.art-orbit-dot{background:#58BCEB;box-shadow:0 0 0 6px rgba(0,95,174,.14)}
-.art-sun{position:absolute;width:45px;height:45px;right:5%;bottom:14%;border-radius:50%;background:#eaf4fb;border:1px solid #b6d9f3;z-index:0}
 .hero-index{color:#71869a}
 .hero-index>span:first-child{color:#005FAE;font-style:normal;font-weight:700}
 .index-rule{background:#88cbea}
@@ -125,8 +106,6 @@ h1,h2,h3,.brand{font-family:Manrope,system-ui,sans-serif}
 .faq-list summary{font-size:14px;color:#244861}
 .contact-section,.contact-panel{background:#edf6fc}
 .contact-panel{border:1px solid #d9eaf6;border-radius:11px}
-.contact-illustration{background:#dcecf8}
-.contact-blob{color:#005FAE}
 .site-footer{background:#102f4d}
 .footer-brand{color:#fff}
 .footer-links a:hover,.medical-notice a:hover{color:#c7e8f8}
@@ -156,17 +135,12 @@ h1,h2,h3,.brand{font-family:Manrope,system-ui,sans-serif}
 .sign-out-button:hover{color:#c7e8f8}
 .member-section .section-kicker{letter-spacing:1.55px}
 :focus-visible{outline:3px solid #005FAE;outline-offset:4px;border-radius:4px}
-@keyframes tooth-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
 @media(max-width:1000px){.hero{min-height:610px}.member-section{gap:7%}}
 @media(max-width:760px){
   .hero{padding-top:49px;padding-bottom:69px}
   .hero h1{font-size:clamp(44px,10vw,60px);letter-spacing:-.052em}
   .hero h1 span{letter-spacing:-.05em}
   .hero-lede{font-size:15px}
-  .hero-art{height:390px}
-  .art-paper{height:314px;width:min(340px,84%);border-radius:145px 145px 11px 11px}
-  .tooth-art{max-height:254px;width:97%;margin-top:11px}
-  .art-label{top:17px;max-width:calc(100% - 24px);padding:8px 10px;font-size:8px;letter-spacing:.95px}
   .member-section{display:block;padding-top:13px;padding-bottom:76px}
   .member-intro{margin-bottom:30px}
   .member-intro h2{font-size:39px}
@@ -181,12 +155,11 @@ h1,h2,h3,.brand{font-family:Manrope,system-ui,sans-serif}
   .article-content>p{font-size:14px}
   .progress-steps p,.routine-list p,.signal-row p,.faq-list details p{font-size:12px}
 }
-@media(prefers-reduced-motion:reduce){.tooth-art{animation:none}}
 
 /* Contrast and keyboard focus improvements for small supporting text. */
 .account-privacy,.card-footnote,.empty-copy{color:#526a7d}
 .brand-light{color:#456f94}
-.hero-note,.hero-index,.art-caption,.page-aside,.source-note,.timer-reset,.routine-no,.signal-no,.contact-caption,.member-footnote,.member-tool small,.week-bar-col,.clinic-footer-note,.clinic-stats article>span,.clinic-stats article small,.request-row>span:last-child,.loading-panel,.empty-state{color:#526a7d}
+.hero-note,.hero-index,.page-aside,.source-note,.timer-reset,.routine-no,.signal-no,.member-footnote,.member-tool small,.week-bar-col,.clinic-footer-note,.clinic-stats article>span,.clinic-stats article small,.request-row>span:last-child,.loading-panel,.empty-state{color:#526a7d}
 .week-badge{color:#315f81;background:#eaf4fb}
 .clinic-footer-note>svg,.account-privacy svg{color:#005FAE}
 .sign-out-demo{color:#526a7d}
@@ -402,3 +375,140 @@ h1,h2,h3,.brand{font-family:Manrope,system-ui,sans-serif}
 @media(max-width:760px){.profile-card-heading{padding:16px 16px 14px}.profile-account-email{margin:13px 15px 0}.profile-form{padding:15px}}
 @media(max-width:390px){.profile-card-heading{grid-template-columns:40px minmax(0,1fr);gap:10px}.profile-card-avatar{width:39px;height:39px}.profile-private-badge{grid-column:2;justify-self:start;margin-top:-4px}.profile-account-email{margin-top:11px}}
 @media(prefers-reduced-motion:reduce){.profile-save-spinner{animation:none}}
+
+/* Step-by-step oral care photographs */
+.brushing-guide{margin:0 0 70px}
+.brushing-stage-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:17px}
+.brushing-stage-card{overflow:hidden;border:1px solid #d9e9f4;border-radius:14px;background:#fff;box-shadow:0 12px 28px rgba(18,59,100,.045);transition:transform .24s,box-shadow .24s}
+.brushing-stage-card:hover{transform:translateY(-3px);box-shadow:0 17px 34px rgba(18,59,100,.09)}
+.brushing-stage-figure{position:relative;padding:10px 10px 0;background:linear-gradient(145deg,#f2f9fe,#e9f5fc)}
+.brushing-stage-count{position:absolute;right:20px;top:20px;width:31px;height:31px;display:grid;place-items:center;border:1px solid #c6e3f3;border-radius:50%;background:#fff;color:#005FAE;font-family:Manrope,system-ui,sans-serif;font-size:10px;font-weight:800;box-shadow:0 4px 11px rgba(18,59,100,.07)}
+.brushing-stage-copy{padding:18px 19px 20px}
+.brushing-stage-tag{display:inline-block;padding:5px 8px;border-radius:20px;background:#eaf5fc;color:#176b9d;font-size:9px;font-weight:700;letter-spacing:.4px}
+.brushing-stage-copy h3{margin:10px 0 6px;color:#123b64;font-size:17px;letter-spacing:-.35px;line-height:1.35}
+.brushing-stage-copy p{margin:0;color:#526d82;font-size:12px;line-height:1.7}
+.brushing-personal-note{display:flex;align-items:flex-start;gap:9px;max-width:780px;margin:18px 0 0;padding:13px 15px;border-left:3px solid #58BCEB;border-radius:0 8px 8px 0;background:#f0f8fd;color:#496981;font-size:11px;line-height:1.6}
+.brushing-personal-note svg{flex:none;color:#0877b8}
+.hygiene-video-card{display:grid;grid-template-columns:.72fr 1.28fr;align-items:center;gap:30px;margin:68px 0 28px;padding:25px;border:1px solid #d7e9f5;border-radius:16px;background:linear-gradient(135deg,#eef8fe 0%,#f8fcff 70%,#e7f5fc 100%);box-shadow:0 18px 38px rgba(18,59,100,.06)}
+.hygiene-video-copy{padding:5px 0 5px 4px}
+.hygiene-video-copy h2{margin:10px 0;color:#123b64;font-family:Manrope,system-ui,sans-serif;font-size:clamp(27px,3.1vw,39px);line-height:1.12;letter-spacing:-.05em}
+.hygiene-video-copy p{margin:0;color:#526d82;font-size:12px;line-height:1.75}
+.hygiene-video-source{display:inline-flex;align-items:center;gap:6px;margin-top:15px;color:#005FAE;font-size:10px;font-weight:700}
+.hygiene-video-frame{position:relative;overflow:hidden;aspect-ratio:16/9;border:1px solid #c6dfef;border-radius:12px;background:#dcecf7;box-shadow:0 10px 26px rgba(18,59,100,.11)}
+.hygiene-video-frame iframe{display:block;width:100%;height:100%;border:0}
+.video-caption{position:absolute;left:11px;bottom:11px;display:inline-flex;align-items:center;gap:6px;padding:6px 9px;border:1px solid rgba(255,255,255,.65);border-radius:20px;background:rgba(255,255,255,.9);color:#194f78;font-size:9px;font-weight:700;pointer-events:none}
+.video-caption svg{color:#005FAE}
+
+/* Gum-condition comparison and progressive detail */
+.condition-explorer{margin:70px 0 0;padding:45px 0 10px;border-top:1px solid #dce8f1}
+.condition-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.condition-card{overflow:hidden;border:1px solid #d7e7f2;border-radius:15px;background:#fff;box-shadow:0 13px 32px rgba(18,59,100,.055);transition:transform .22s,box-shadow .22s}
+.condition-card:hover{transform:translateY(-3px);box-shadow:0 18px 38px rgba(18,59,100,.1)}
+.condition-card-figure{position:relative;padding:11px;background:linear-gradient(145deg,#f2f9fe,#eaf5fc)}
+.condition-figure-caption{position:absolute;right:19px;bottom:19px;padding:6px 9px;border:1px solid #d4e8f4;border-radius:20px;background:rgba(255,255,255,.92);color:#406783;font-size:8px;font-weight:700}
+.condition-card-content{display:flex;flex-direction:column;align-items:flex-start;padding:19px 20px 20px}
+.condition-kicker{color:#0877b8;font-size:8px;font-weight:800;letter-spacing:1.05px}
+.condition-card-content h3{margin:7px 0;color:#123b64;font-family:Manrope,system-ui,sans-serif;font-size:23px;letter-spacing:-.6px}
+.condition-card-content>p{margin:0;color:#526d82;font-size:11px;line-height:1.75}
+.condition-more{width:100%;margin-top:14px;border-top:1px solid #e1edf5;border-bottom:1px solid #e1edf5}
+.condition-more summary{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:43px;color:#005FAE;font-size:10px;font-weight:800;cursor:pointer;list-style:none}
+.condition-more summary::-webkit-details-marker{display:none}
+.condition-more summary svg{flex:none;transition:rotate .2s}
+.condition-more[open] summary svg{rotate:180deg}
+.condition-more>div{padding:0 0 13px;color:#526d82;font-size:10px;line-height:1.7}
+.condition-more>div p{margin:0 0 8px}
+.condition-more>div a{display:inline-flex;align-items:center;gap:5px;color:#005FAE;font-weight:700}
+.condition-cta{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;min-height:42px;margin-top:14px;padding:0 12px;border:1px solid #b8dced;border-radius:8px;background:#eff8fd;color:#00538f;font-size:10px;font-weight:800;transition:background .18s,border-color .18s,transform .18s}
+.condition-cta:hover{transform:translateY(-1px);border-color:#58BCEB;background:#e4f4fc}
+.condition-cta svg{flex:none}
+.condition-source-note{display:flex;align-items:flex-start;gap:7px;margin:18px 0 0;color:#5b7488;font-size:9px;line-height:1.6}
+.condition-source-note svg{flex:none;color:#1687b5}
+.condition-source-note a{color:#005FAE;text-decoration:underline;text-underline-offset:2px}
+
+/* Premium mobile navigation drawer */
+.mobile-nav-intro,.mobile-nav-footer,.nav-mobile-index,.nav-mobile-arrow,.mobile-menu-backdrop{display:none}
+@media(max-width:760px){
+  .site-header{z-index:50;height:70px}
+  .nav-wrap{position:relative}
+  .menu-toggle{display:grid;place-items:center;width:44px;height:44px;padding:0;border:1px solid #d5e7f3;border-radius:13px;background:#fff;color:#123b64;box-shadow:0 4px 13px rgba(18,59,100,.06);transition:background .2s,border-color .2s,transform .2s}
+  .menu-toggle:active{transform:scale(.95)}
+  .menu-toggle.is-open{border-color:#b6d9f3;background:#eaf5fc;color:#005FAE}
+  .mobile-menu-backdrop{display:block;position:fixed;inset:70px 0 0;z-index:45;border:0;background:rgba(13,42,67,.28);backdrop-filter:blur(3px);animation:menu-backdrop-in .2s ease-out both}
+  .site-nav{display:flex;visibility:hidden;pointer-events:none;position:absolute;z-index:51;top:calc(100% + 8px);left:0;right:0;width:100%;max-height:calc(100dvh - 96px);overflow-y:auto;overscroll-behavior:contain;flex-direction:column;align-items:stretch;gap:5px;padding:15px;border:1px solid #d6e8f4;border-radius:17px;background:rgba(255,255,255,.98);box-shadow:0 24px 54px rgba(12,44,73,.19),0 3px 8px rgba(12,44,73,.06);opacity:0;transform:translateY(-9px) scale(.985);transform-origin:top right;transition:opacity .2s ease,transform .24s cubic-bezier(.2,.75,.25,1),visibility .2s}
+  .site-nav.is-open{visibility:visible;pointer-events:auto;opacity:1;transform:translateY(0) scale(1)}
+  .mobile-nav-intro{display:flex;flex-direction:column;gap:3px;padding:3px 6px 11px;border-bottom:1px solid #e2eef6}
+  .mobile-nav-intro>span{color:#005FAE;font-size:9px;font-weight:800;letter-spacing:1.3px}
+  .mobile-nav-intro small{color:#688198;font-size:10px}
+  .site-nav>a.site-nav-link{display:grid;grid-template-columns:31px minmax(0,1fr) 19px;align-items:center;gap:10px;min-height:54px;padding:6px 9px;border:1px solid transparent;border-radius:11px;background:transparent;color:#274d69;font-size:13px;font-weight:650;transition:background .18s,border-color .18s,color .18s,transform .18s}
+  .site-nav>a.site-nav-link:hover,.site-nav>a.site-nav-link.active{border-color:#d7eaf6;background:#f0f8fd;color:#005FAE}
+  .site-nav>a.site-nav-link:active{transform:scale(.99)}
+  .site-nav .active:not(.nav-cta):after{display:none}
+  .nav-mobile-index{display:grid;place-items:center;width:28px;height:28px;border:1px solid #d9ebf6;border-radius:9px;background:#f3f9fd;color:#5796bd;font-family:Manrope,system-ui,sans-serif;font-size:9px;font-weight:800}
+  .site-nav>a.site-nav-link.active .nav-mobile-index{border-color:#b9dff2;background:#e2f3fc;color:#005FAE}
+  .nav-link-label{min-width:0}
+  .nav-mobile-arrow{display:block;color:#8bb6d0}
+  .site-nav .nav-cta{display:flex;justify-content:center;min-height:48px;margin-top:5px;padding:0 15px;border-radius:10px;background:linear-gradient(110deg,#123b64,#005FAE);font-size:12px;box-shadow:0 7px 16px rgba(0,95,174,.16)}
+  .mobile-nav-footer{display:flex;align-items:flex-start;gap:7px;padding:9px 5px 1px;color:#74899b;font-size:9px;line-height:1.5}
+  .mobile-nav-footer svg{flex:none;color:#1687b5}
+  .mobile-menu-open{overflow:hidden}
+  .site-nav.is-open .mobile-nav-intro,.site-nav.is-open .site-nav-link,.site-nav.is-open .nav-cta,.site-nav.is-open .mobile-nav-footer{animation:mobile-nav-item-in .32s cubic-bezier(.2,.75,.25,1) both}
+  .site-nav.is-open .site-nav-link:nth-child(2){animation-delay:20ms}.site-nav.is-open .site-nav-link:nth-child(3){animation-delay:45ms}.site-nav.is-open .site-nav-link:nth-child(4){animation-delay:70ms}.site-nav.is-open .site-nav-link:nth-child(5){animation-delay:95ms}.site-nav.is-open .site-nav-link:nth-child(6){animation-delay:120ms}
+}
+@media(max-width:390px){.site-nav{padding:12px}.site-nav>a.site-nav-link{min-height:50px}.mobile-nav-intro{padding-bottom:9px}}
+@keyframes mobile-nav-item-in{from{opacity:0;translate:0 5px}to{opacity:1;translate:0 0}}
+@keyframes menu-backdrop-in{from{opacity:0}to{opacity:1}}
+@media(max-width:760px){
+  .brushing-stage-grid,.condition-grid{grid-template-columns:1fr;gap:13px}
+  .brushing-guide{margin-bottom:54px}
+  .brushing-stage-figure{padding:9px 9px 0}
+  .brushing-stage-copy{padding:15px 16px 17px}
+  .brushing-stage-copy h3{font-size:16px}
+  .brushing-stage-copy p{font-size:12px}
+  .brushing-personal-note{font-size:10px}
+  .hygiene-video-card{grid-template-columns:1fr;gap:18px;margin:48px 0 22px;padding:17px;border-radius:13px}
+  .hygiene-video-copy{padding:2px}
+  .hygiene-video-copy h2{font-size:31px}
+  .hygiene-video-copy p{font-size:11px}
+  .condition-explorer{margin-top:52px;padding-top:37px}
+  .condition-card-content{padding:16px}
+  .condition-card-content h3{font-size:21px}
+  .condition-card-content>p{font-size:11px}
+  .condition-figure-caption{right:15px;bottom:15px}
+}
+@media(max-width:390px){.brushing-stage-count{right:16px;top:16px}.condition-card-figure{padding:8px}.condition-figure-caption{right:12px;bottom:12px;font-size:7px}}
+@media(prefers-reduced-motion:reduce){.site-nav.is-open .mobile-nav-intro,.site-nav.is-open .site-nav-link,.site-nav.is-open .nav-cta,.site-nav.is-open .mobile-nav-footer,.mobile-menu-backdrop{animation:none!important}.brushing-stage-card:hover,.condition-card:hover,.condition-cta:hover{transform:none}}
+
+/* Real photography replaces the former dental drawings. */
+.hero-photo{position:relative;isolation:isolate;justify-self:center;width:min(440px,91%);height:485px;margin:0;overflow:hidden;border:7px solid #fff;border-radius:230px 230px 22px 22px;background:#dceef8;box-shadow:0 28px 70px rgba(18,59,100,.16)}
+.hero-photo:before{content:"";position:absolute;inset:12px;z-index:1;border:1px solid rgba(255,255,255,.66);border-radius:215px 215px 15px 15px;pointer-events:none}
+.hero-photo img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 42%}
+.hero-photo figcaption{position:absolute;z-index:2;left:50%;bottom:22px;display:flex;align-items:center;gap:8px;width:max-content;max-width:calc(100% - 32px);padding:11px 15px;border:1px solid rgba(255,255,255,.8);border-radius:999px;background:rgba(255,255,255,.94);color:#123b64;font-size:10px;font-weight:800;letter-spacing:.9px;text-transform:uppercase;transform:translateX(-50%);box-shadow:0 6px 20px rgba(18,59,100,.12)}
+.hero-photo figcaption svg{color:#0877b8}
+.periodontal-photo-section{margin:54px 0 62px;padding:35px;border:1px solid #d9eaf5;border-radius:20px;background:linear-gradient(140deg,#f2f9fd,#fff 62%,#eaf5fc)}
+.periodontal-photo-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:17px;margin-top:21px}
+.periodontal-photo-card{overflow:hidden;margin:0;border:1px solid #d4e5f0;border-radius:14px;background:white;box-shadow:0 9px 23px rgba(18,59,100,.07)}
+.periodontal-photo-card img{display:block;width:100%;aspect-ratio:1.7/1;object-fit:cover;object-position:center 48%;background:#e8eef2}
+.periodontal-photo-card:first-child img,.condition-card:first-child .condition-photo{object-position:center 50%}
+.periodontal-photo-card figcaption{display:flex;flex-direction:column;gap:4px;padding:13px 15px}
+.periodontal-photo-card figcaption strong{color:#123b64;font-size:12px}
+.periodontal-photo-card figcaption span{color:#61788c;font-size:10px;line-height:1.5}
+.clinical-image-note{display:flex;align-items:flex-start;gap:8px;margin:15px 0 0;color:#526d82;font-size:10px;line-height:1.6}
+.clinical-image-note svg{flex:none;color:#0877b8}
+.brushing-stage-figure{padding:9px;background:#e9f5fc}
+.brushing-stage-figure img{display:block;width:100%;height:auto;aspect-ratio:1.45/1;object-fit:cover;object-position:center 46%;border-radius:10px}
+.condition-card-figure{padding:9px;background:#eaf5fc}
+.condition-photo{display:block;width:100%;height:auto;aspect-ratio:1.7/1;object-fit:cover;object-position:center 45%;border-radius:10px;background:#e8eef2}
+.condition-figure-caption{font-size:8px;line-height:1.35}
+.faq-support-photo{display:block;width:100%;height:184px;object-fit:cover;object-position:center 37%;margin:0 0 20px;border:1px solid #cfe3f1;border-radius:13px}
+.contact-photo{position:relative;min-height:340px;margin:0;overflow:hidden;border-radius:15px;background:#dfeef8}
+.contact-photo img{display:block;width:100%;height:100%;min-height:340px;object-fit:cover;object-position:center 35%}
+.contact-photo figcaption{position:absolute;right:13px;bottom:13px;max-width:calc(100% - 26px);padding:9px 12px;border:1px solid rgba(255,255,255,.8);border-radius:999px;background:rgba(255,255,255,.94);color:#123b64;font-size:10px;font-weight:700}
+.contact-panel{grid-template-columns:1fr 1fr;gap:37px;align-items:center}
+.account-story{isolation:isolate;background:none}
+.account-story-photo{position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover;object-position:center 38%;opacity:.37}
+.account-story:after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(145deg,rgba(18,59,100,.94),rgba(0,95,174,.83))}
+.booking-support-photo{display:block;width:100%;height:190px;margin:18px 0;border:1px solid #d4e7f4;border-radius:15px;object-fit:cover;object-position:center 36%;box-shadow:0 12px 28px rgba(18,59,100,.09)}
+.booking-status-note{padding:12px 14px;border:1px solid #b8e0f1;border-radius:11px;background:#edf8fd;color:#315f81;font-size:11px;line-height:1.6}
+@media(max-width:900px){.hero-photo{width:min(400px,92%);height:430px}.periodontal-photo-section{padding:26px}.contact-panel{gap:24px}}
+@media(max-width:760px){.hero-photo{width:min(420px,100%);height:390px;margin-top:17px;border-width:5px;border-radius:205px 205px 18px 18px}.hero-photo figcaption{bottom:15px;font-size:9px}.periodontal-photo-section{margin:40px 0 48px;padding:17px;border-radius:15px}.periodontal-photo-grid{grid-template-columns:1fr;gap:12px}.periodontal-photo-card img{aspect-ratio:1.6/1}.brushing-stage-figure img{aspect-ratio:1.4/1}.condition-photo{aspect-ratio:1.55/1}.faq-support-photo{height:165px;margin-bottom:15px}.contact-panel{grid-template-columns:1fr}.contact-photo,.contact-photo img{min-height:230px;height:230px}.booking-support-photo{height:165px;margin:13px 0}}
+@media(max-width:390px){.hero-photo{height:330px}.hero-photo figcaption{font-size:8px;padding:9px 12px}.periodontal-photo-section{padding:13px}.periodontal-photo-card figcaption{padding:11px 12px}.contact-photo,.contact-photo img{min-height:205px;height:205px}}

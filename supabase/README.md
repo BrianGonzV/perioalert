@@ -6,7 +6,7 @@ Esta carpeta contiene las migraciones SQL del proyecto. Crean tablas para perfil
 
 1. Crea un proyecto en el [Dashboard de Supabase](https://supabase.com/dashboard). Guarda la contraseña de base de datos en un administrador de contraseñas; Perioalert no la necesita para el frontend.
 2. Abre **SQL Editor → New query**.
-3. Ejecuta en SQL Editor, en ese orden y en consultas separadas, `migrations/202610280001_initial_schema.sql`, `migrations/202610280002_appointment_time_slots.sql`, `migrations/202610280003_appointment_photos_notes_email.sql`, `migrations/202610280004_appointment_patient_identity.sql` y `migrations/202610280005_appointment_confirmation_email.sql`. La cuarta añade edad y DNI opcional al perfil; la quinta guarda el correo de destino y actualiza el consentimiento a v4.
+3. Ejecuta en SQL Editor, en ese orden y en consultas separadas, las migraciones `202610280001` a `202610280006`. La cuarta añade edad y DNI opcional, la quinta guarda el correo de destino y la sexta confirma nuevas reservas automáticamente y actualiza el consentimiento a v5.
 4. Crea `.env.local` en la raíz a partir de `.env.example`. En **Project Settings → API Keys** o en el panel **Connect** copia el Project URL y la publishable key:
 
    ```dotenv
@@ -27,11 +27,11 @@ La clave publishable está pensada para aparecer en el navegador. La autorizaci�
 - El registro crea perfil y rol paciente automáticamente.
 - El portal guarda perfil, lista de recordatorios y checks diarios asociados al usuario autenticado.
 - Los recordatorios se guardan, pero todavía no envían notificaciones.
-- Las citas se solicitan por fecha y horario de 30 minutos; permanecen pendientes hasta que la clínica las confirme.
+- Las nuevas citas reservan automáticamente un horario de 30 minutos y quedan confirmadas en la agenda; no requieren aprobación manual.
 - La solicitud pide nombre completo y edad, y permite registrar un DNI peruano de ocho dígitos de forma opcional. Estos datos se guardan en el perfil del paciente; solo el paciente y el personal autorizado de clínica pueden verlos.
 - La solicitud también permite una descripción opcional y hasta tres fotos privadas. Cada foto puede ser JPG, PNG o WebP y pesar hasta 5 MB.
-- El aviso de privacidad `v4` es un borrador de demostración: valida si la clínica necesita el DNI y completa la identidad, el contacto, la retención y el texto aprobado antes de recibir datos reales.
-- El correo de recepción se envía desde una Edge Function con Resend; no se envían la descripción ni las fotos en el correo.
+- El aviso de privacidad `v5` sigue siendo un borrador: la clínica debe completar su identidad legal, contacto, retención y texto aprobado antes de recibir datos reales.
+- La Edge Function envía una confirmación con resumen y PDF adjunto. El correo y PDF omiten DNI, fotos y descripción personal.
 - Los paneles demo usan filas ficticias en el frontend y nunca las insertan en la base de datos.
 
 Para una base que ya esté en producción, usa migraciones versionadas para los cambios posteriores y evita editar tablas manualmente en Dashboard sin registrar la migración en el repositorio.
@@ -45,27 +45,42 @@ La migración `migrations/202610280002_appointment_time_slots.sql` agrega horari
 - Para activar los adjuntos, descripciones y el correo, ejecuta después `202610280003_appointment_photos_notes_email.sql`.
 - Para solicitar nombre, edad y DNI opcional en las citas, ejecuta `202610280004_appointment_patient_identity.sql` después de la migración 003.
 - Para guardar una dirección de correo de confirmación por solicitud, ejecuta `202610280005_appointment_confirmation_email.sql` después de la migración 004.
+- Para confirmar automáticamente nuevas reservas, permitir sus fotos y aceptar el consentimiento v5, ejecuta `202610280006_auto_confirm_appointment_pdf.sql` después de la migración 005.
 - La web de demostración guarda citas ficticias solo en el almacenamiento local del navegador. Las citas reales requieren inicio de sesión y usan la base de datos.
 - La clínica y su ubicación, agenda y registros de demostración son ficticios. Reemplázalos y confirma el aviso de privacidad antes de publicar reservas reales.
 
-## Fotos, descripción y correo de solicitud
+## Fotos, descripción y correo con PDF
 
-La migración `migrations/202610280003_appointment_photos_notes_email.sql` crea el bucket privado `appointment-photos`, los permisos de lectura para el paciente y el rol clínico, los campos de descripción y consentimiento, y el estado idempotente del correo. Las migraciones 004 y 005 añaden los datos del paciente y el correo de destino elegido para cada cita.
+Las migraciones 003 a 006 crean el bucket privado de fotos, guardan la información de identidad y el correo destino, confirman el horario al reservar y controlan el envío idempotente del resumen PDF.
 
-1. Ejecuta la migración `202610280003_appointment_photos_notes_email.sql` después de `202610280002_appointment_time_slots.sql`.
-2. Verifica tu dominio de envío en Resend y crea una API key de envío. El dominio debe estar verificado antes de mandar correos a pacientes.
+1. Ejecuta `202610280006_auto_confirm_appointment_pdf.sql` en SQL Editor después de las migraciones anteriores. No vuelvas a ejecutar 001–005 si ya las aplicaste.
+2. En Resend, verifica el dominio remitente y crea una API key. El dominio remitente debe estar verificado para entregar correo a pacientes.
 3. Configura estos secretos en **Supabase → Edge Functions → Secrets**. Nunca los añadas a `VITE_*` ni los guardes en Git:
 
    - `RESEND_API_KEY`: API key de Resend.
    - `RESEND_FROM_EMAIL`: remitente usando el dominio verificado, por ejemplo `Perioalert <citas@tu-dominio.pe>`.
-   - `APP_ALLOWED_ORIGINS`: orígenes separados por comas, por ejemplo `http://localhost:5173,https://tu-dominio.vercel.app`.
+   - `APP_ALLOWED_ORIGINS`: orígenes exactos separados por comas, sin rutas, por ejemplo `http://localhost:5173,https://tu-dominio.vercel.app`. Añade también el dominio de producción personalizado si lo tienes.
 
-4. Con Supabase CLI autenticado y el proyecto enlazado, despliega la función:
+   También puedes guardarlos con Supabase CLI desde PowerShell (reemplaza los ejemplos y usa el dominio que ves en la barra del navegador al abrir Vercel):
+
+   ```powershell
+   supabase secrets set RESEND_API_KEY=re_REEMPLAZAR "RESEND_FROM_EMAIL=Perioalert <citas@dominio-verificado.pe>" "APP_ALLOWED_ORIGINS=http://localhost:5173,https://tu-dominio.vercel.app" --project-ref axvhkaktvhxiokrrmtui
+   ```
+
+   No pegues el valor real de `RESEND_API_KEY` en el repositorio, el chat ni una variable `VITE_*`.
+
+4. Despliega la función Edge con Supabase CLI (los secretos integrados de Supabase para URL y claves los aporta el proyecto). También puedes desplegar la función desde el Dashboard de Supabase:
 
    ```bash
+   supabase login
+   supabase link --project-ref axvhkaktvhxiokrrmtui
    supabase functions deploy send-appointment-confirmation --project-ref axvhkaktvhxiokrrmtui
    ```
 
-La pantalla confirma primero que la solicitud quedó guardada. Si el proveedor de correo falla, permite reintentar sin duplicar el correo. El correo contiene únicamente la fecha y hora; los datos identificativos, las fotos y la descripción solo aparecen en el panel privado de clínica.
+5. Crea una cita con una cuenta paciente. El estado debe aparecer como confirmada y el correo seleccionado debe recibir el resumen y `Perioalert-cita-AAAA-MM-DD.pdf`. Si Resend rechaza el envío, la pantalla muestra el error del proveedor y permite reintentarlo con una clave idempotente.
 
-El campo de destinatario se precarga con el correo de la cuenta y puede editarse antes de enviar la solicitud. La dirección se guarda con la cita y se muestra al personal autorizado de clínica. La confirmación se envía desde `RESEND_FROM_EMAIL` al correo elegido.
+6. Si falla, revisa **Supabase → Edge Functions → Logs** y **Resend → Emails**. Comprueba primero que la migración 006 se aplicó, la función se desplegó después del cambio, el origen de Vercel está en `APP_ALLOWED_ORIGINS`, el dominio remitente está verificado y los secretos estén guardados en el proyecto Supabase correcto.
+
+El campo de destinatario se precarga con el correo de la cuenta y puede editarse antes de reservar. La dirección se guarda con la cita y solo se muestra al paciente y al personal autorizado. El correo incluye el nombre, fecha, hora, motivo general y código de cita. No adjunta el DNI, las fotos ni la descripción.
+
+**La agenda, la ubicación de Trujillo y la clínica siguen siendo datos ficticios de demostración.** Aunque la reserva y el envío funcionen, configura el centro, dirección, agenda real y aviso de privacidad aprobado antes de aceptar pacientes.

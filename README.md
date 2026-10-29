@@ -1,6 +1,6 @@
 # Perioalert
 
-Plataforma educativa periodontal en React, TypeScript y Vite. Incluye páginas públicas, registro e inicio de sesión Supabase, portal de paciente, agenda con horarios, solicitudes con nombre, edad, DNI opcional, correo de confirmación, descripción y fotos privadas, y panel clínico.
+Plataforma educativa periodontal en React, TypeScript y Vite. Incluye páginas públicas con fotografías reales, registro e inicio de sesión Supabase, portal de paciente, agenda con horarios, citas confirmadas automáticamente, correo con resumen PDF, fotos privadas y panel clínico.
 
 ## Desarrollo local
 
@@ -24,7 +24,7 @@ VITE_SUPABASE_PUBLISHABLE_KEY=
 
 Nunca uses `service_role` en el frontend. Los ejemplos demo son ficticios; no añadas datos de pacientes al repositorio.
 
-Ejecuta las cinco migraciones en orden; en una base ya existente, aplica también `202610280004_appointment_patient_identity.sql` y `202610280005_appointment_confirmation_email.sql` en Supabase SQL Editor. La quinta habilita el correo de destino de la confirmación. Despliega `send-appointment-confirmation` y configura Resend en los secretos de Supabase según la guía. Sin ese proveedor configurado, la cita se guarda y la pantalla informa que el correo no se pudo enviar.
+Ejecuta las seis migraciones en orden; en una base que ya tenga las anteriores, aplica `202610280006_auto_confirm_appointment_pdf.sql` en Supabase SQL Editor. Despliega `send-appointment-confirmation` y configura el dominio y las claves de Resend en los secretos de Supabase según la guía. Las nuevas reservas se confirman automáticamente y el correo incluye el resumen y PDF. Consulta [la guía de Supabase](supabase/README.md) si el correo falla y [los créditos de fotografías](docs/image-credits.md) para conocer las fuentes.
 
 ## Publicar
 
@@ -38,4 +38,4 @@ Al estar conectado a GitHub, Vercel desplegará el commit. Configura también la
 
 ## Alcance del prototipo
 
-Los perfiles, hábitos, recordatorios y solicitudes se guardan con RLS por usuario. La agenda ofrece turnos de 30 minutos y bloquea duplicados. El nombre y la edad se piden al reservar; el DNI de ocho dígitos es opcional y solo se muestra al paciente y al personal autorizado. Las fotos se guardan en un bucket privado. La clínica, su ubicación y sus horarios son de demostración. Reemplázalos y confirma el aviso de privacidad, la necesidad de cada dato, el consentimiento, los contactos y las reglas operativas antes de recibir datos reales.
+Los perfiles, hábitos, recordatorios y citas se guardan con RLS por usuario. La agenda ofrece turnos de 30 minutos y bloquea duplicados. El nombre y la edad se piden al reservar; el DNI es opcional y solo se muestra al paciente y al personal autorizado. Las fotos se guardan en un bucket privado. La clínica, su ubicación y sus horarios son de demostración. Reemplázalos y aprueba el aviso de privacidad, la necesidad de cada dato, el consentimiento, los contactos y las reglas operativas antes de recibir pacientes reales.

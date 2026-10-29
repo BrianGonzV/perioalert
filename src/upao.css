@@ -512,3 +512,48 @@ h1,h2,h3,.brand{font-family:Manrope,system-ui,sans-serif}
 @media(max-width:900px){.hero-photo{width:min(400px,92%);height:430px}.periodontal-photo-section{padding:26px}.contact-panel{gap:24px}}
 @media(max-width:760px){.hero-photo{width:min(420px,100%);height:390px;margin-top:17px;border-width:5px;border-radius:205px 205px 18px 18px}.hero-photo figcaption{bottom:15px;font-size:9px}.periodontal-photo-section{margin:40px 0 48px;padding:17px;border-radius:15px}.periodontal-photo-grid{grid-template-columns:1fr;gap:12px}.periodontal-photo-card img{aspect-ratio:1.6/1}.brushing-stage-figure img{aspect-ratio:1.4/1}.condition-photo{aspect-ratio:1.55/1}.faq-support-photo{height:165px;margin-bottom:15px}.contact-panel{grid-template-columns:1fr}.contact-photo,.contact-photo img{min-height:230px;height:230px}.booking-support-photo{height:165px;margin:13px 0}}
 @media(max-width:390px){.hero-photo{height:330px}.hero-photo figcaption{font-size:8px;padding:9px 12px}.periodontal-photo-section{padding:13px}.periodontal-photo-card figcaption{padding:11px 12px}.contact-photo,.contact-photo img{min-height:205px;height:205px}}
+
+/* Homepage topic cards use the existing educational photography. */
+.topic-card{min-height:400px;padding:0;align-items:stretch}
+.topic-image-frame{position:relative;display:block;width:100%;height:164px;flex:none;overflow:hidden;margin:0;background:#dfeef8}
+.topic-image{display:block;width:100%;height:100%;object-fit:cover;object-position:center 42%;transition:transform .35s ease}
+.topic-featured .topic-image{object-position:center 35%}
+.topic-alert .topic-image{object-position:center 50%}
+.topic-card:hover .topic-image{transform:scale(1.035)}
+.topic-image-caption{position:absolute;right:10px;bottom:10px;max-width:calc(100% - 20px);padding:6px 9px;border:1px solid rgba(255,255,255,.8);border-radius:999px;background:rgba(255,255,255,.94);color:#123b64;font-size:9px;font-weight:700;line-height:1.3}
+.topic-card-content{display:flex;flex:1;flex-direction:column;align-items:flex-start;padding:18px 21px 20px}
+.topic-card-meta{display:flex;width:100%;align-items:center;justify-content:space-between;gap:12px}
+.topic-card-meta .topic-icon{flex:none}
+.topic-card-meta .topic-number{margin:0;text-align:right}
+.topic-card-content h3{margin:12px 0 8px;font-size:25px}
+.topic-card-content p{max-width:290px}
+.topic-card-content .topic-link{padding-top:12px}
+@media(max-width:760px){.topic-card{min-height:390px}.topic-image-frame{height:175px}.topic-card-content{padding:18px 21px 20px}}
+.privacy-photo-note{display:grid;grid-template-columns:minmax(180px,.72fr) 1.28fr;gap:22px;align-items:center;margin:28px 0;padding:16px;border:1px solid #d9eaf5;border-radius:13px;background:#f4f9fc}
+.privacy-photo-note img{display:block;width:100%;height:165px;object-fit:cover;object-position:center 48%;border-radius:9px}
+.privacy-photo-note h2{margin:0 0 8px}
+.privacy-photo-note p{margin:0}
+.not-found-layout{display:grid;width:100%;grid-template-columns:1fr .85fr;gap:54px;align-items:center}
+.not-found-photo{position:relative;overflow:hidden;margin:0;border:6px solid #fff;border-radius:165px 165px 14px 14px;background:#eaf4fb;box-shadow:0 18px 45px rgba(18,59,100,.12)}
+.not-found-photo img{display:block;width:100%;height:335px;object-fit:cover;object-position:center 40%}
+.not-found-photo figcaption{position:absolute;right:12px;bottom:12px;padding:8px 11px;border:1px solid rgba(255,255,255,.8);border-radius:999px;background:rgba(255,255,255,.95);color:#123b64;font-size:9px;font-weight:700}
+@media(max-width:760px){.privacy-photo-note{grid-template-columns:1fr;gap:14px;padding:13px}.privacy-photo-note img{height:185px}.not-found-layout{grid-template-columns:1fr;gap:29px}.not-found-photo{width:min(390px,100%);justify-self:center}.not-found-photo img{height:300px}}
+.home-photo-stories{padding-bottom:92px}
+.home-photo-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.home-photo-card{display:grid;grid-template-columns:minmax(0,.9fr) 1fr;min-height:250px;overflow:hidden;border:1px solid #d9eaf5;border-radius:14px;background:#fff;box-shadow:0 10px 25px rgba(18,59,100,.06)}
+.home-photo-card img{display:block;width:100%;height:100%;min-height:250px;object-fit:cover;object-position:center 42%}
+.home-photo-card>div{display:flex;flex-direction:column;align-items:flex-start;padding:23px 21px}
+.home-photo-card .section-kicker{font-size:8px;letter-spacing:1.1px}
+.home-photo-card h3{margin:12px 0;color:#123b64;font-size:22px;line-height:1.22;letter-spacing:-.6px}
+.home-photo-card a{display:inline-flex;align-items:center;gap:7px;margin-top:auto;padding-top:13px;color:#005FAE;font-size:10px;font-weight:700}
+.periodontal-evaluation-photo,.interdental-photo-card,.signals-evaluation-photo{display:grid;grid-template-columns:minmax(0,.9fr) 1.1fr;gap:30px;align-items:center;margin:36px 0 56px;padding:18px;border:1px solid #d9eaf5;border-radius:17px;background:linear-gradient(135deg,#f2f9fd,#fff 70%);box-shadow:0 11px 28px rgba(18,59,100,.05)}
+.periodontal-evaluation-photo figure,.interdental-photo-card figure,.signals-evaluation-photo figure{position:relative;overflow:hidden;margin:0;border-radius:11px;background:#e7f2f9}
+.periodontal-evaluation-photo img,.interdental-photo-card img,.signals-evaluation-photo img{display:block;width:100%;height:270px;object-fit:cover;object-position:center 42%}
+.interdental-photo-card img{object-position:center 46%}
+.signals-evaluation-photo img{object-position:center 35%}
+.periodontal-evaluation-photo figcaption,.interdental-photo-card figcaption,.signals-evaluation-photo figcaption{position:absolute;right:10px;bottom:10px;max-width:calc(100% - 20px);padding:7px 10px;border:1px solid rgba(255,255,255,.8);border-radius:999px;background:rgba(255,255,255,.95);color:#123b64;font-size:9px;font-weight:700}
+.periodontal-evaluation-photo>div,.interdental-photo-card>div,.signals-evaluation-photo>div{padding:8px 15px 8px 0}
+.periodontal-evaluation-photo h2,.interdental-photo-card h2,.signals-evaluation-photo h2{margin:12px 0 9px;color:#123b64;font-family:Manrope,system-ui,sans-serif;font-size:clamp(25px,3vw,34px);line-height:1.13;letter-spacing:-1px}
+.periodontal-evaluation-photo p,.interdental-photo-card p,.signals-evaluation-photo p{margin:0;color:#5e7182;font-size:13px;line-height:1.8}
+.periodontal-evaluation-photo .text-link,.interdental-photo-card .text-link,.signals-evaluation-photo .text-link{margin-top:18px}
+@media(max-width:760px){.home-photo-stories{padding-bottom:68px}.home-photo-grid{grid-template-columns:1fr;gap:13px}.home-photo-card{grid-template-columns:1fr;min-height:0}.home-photo-card img{height:205px;min-height:205px}.home-photo-card>div{min-height:195px;padding:19px}.home-photo-card h3{font-size:21px}.periodontal-evaluation-photo,.interdental-photo-card,.signals-evaluation-photo{grid-template-columns:1fr;gap:15px;margin:28px 0 42px;padding:12px;border-radius:13px}.periodontal-evaluation-photo img,.interdental-photo-card img,.signals-evaluation-photo img{height:210px}.periodontal-evaluation-photo>div,.interdental-photo-card>div,.signals-evaluation-photo>div{padding:5px 7px 9px}.periodontal-evaluation-photo h2,.interdental-photo-card h2,.signals-evaluation-photo h2{font-size:27px}}

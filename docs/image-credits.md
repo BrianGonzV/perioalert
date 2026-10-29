@@ -10,6 +10,9 @@ The site uses real photographs stored locally in `public/images/`. The brushing 
 - `brushing-model-instruction.jpg` — Bakytzhan Baurzhanov, [Pexels photo 9951397](https://www.pexels.com/photo/dentist-presenting-dental-hygiene-9951397/), Pexels License.
 - `brushing-model-hands.jpg` — Arvind Philomin, [Pexels photo 11597420](https://www.pexels.com/photo/person-brushing-dentures-11597420/), Pexels License.
 - `dental-consultation.jpg` — Ozkan Guner, [Unsplash photo](https://unsplash.com/photos/a-dentist-examining-a-patient-rRgjO2Y1g1E), Unsplash License.
+- `periodontal-evaluation.jpg` — Tima Miroshnichenko, [Pexels photo 5355704](https://www.pexels.com/photo/a-dentist-showing-a-dental-x-ray-5355704/), Pexels License. Used as an illustration of a consultation, not as a periodontal diagnosis.
+- `interdental-flossing.jpg` — Sora Shimazaki, [Pexels photo 5938296](https://www.pexels.com/photo/black-woman-cleaning-teeth-with-flosser-5938296/), Pexels License.
+- `dental-examination.jpg` — cottonbro studio, [Pexels photo 6528855](https://www.pexels.com/photo/close-up-photo-of-dentist-examining-patient-s-teeth-6528855/), Pexels License.
 
 Pexels lists the cited photographs as free to use.
 

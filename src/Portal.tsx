@@ -51,6 +51,14 @@ function DemoBanner() {
   return <div className="demo-banner"><Sparkles size={17} /><div><strong>Modo demostración · datos ficticios</strong><span>Los cambios de prueba no se envían a una clínica ni a Supabase.</span></div><span className="demo-chip">DEMO</span></div>
 }
 
+function PatientPhotoTip() {
+  return <article className="patient-photo-tip"><img src="/images/brushing-model-closeup.jpg" alt="Cepillo colocado junto al borde de la encía en un modelo dental" loading="lazy" /><div><span className="section-kicker">GUÍA DE HIGIENE</span><p>Repasa la posición del cepillo y los movimientos suaves en la guía visual.</p><Link to="/higiene">Ver pasos <ArrowRight size={14} /></Link></div></article>
+}
+
+function ClinicCarePhotoNote() {
+  return <aside className="clinic-care-photo-note"><img src="/images/dental-consultation.jpg" alt="Profesional dental conversa con una paciente durante una consulta" loading="lazy" /><div><span className="section-kicker">ATENCIÓN ODONTOLÓGICA</span><p>Una agenda ordenada ayuda a coordinar cada visita y acompañar a las personas.</p><small>Fotografía referencial; no representa esta sede ni a su personal.</small></div></aside>
+}
+
 function FormMessage({ children, kind = 'success' }: { children: string; kind?: 'success' | 'error' }) {
   return <p className={`form-message ${kind}`} role="status">{kind === 'success' ? <CheckCircle2 size={16} /> : <ShieldCheck size={16} />}{children}</p>
 }
@@ -170,6 +178,7 @@ function DemoPatientDashboard() {
       </section><aside className="dashboard-side">
         <article className="side-card reminder-card"><div className="card-heading"><div><span className="section-kicker">TUS RECORDATORIOS</span><h2>Momentos para ti</h2></div><Clock3 size={19} /></div>{reminders.map((reminder) => <div className="reminder-row" key={reminder.id}><span className="reminder-time">{reminder.time}</span><span className="reminder-label">{reminder.label}</span><button type="button" className={`toggle-switch ${reminder.active ? 'on' : ''}`} aria-label={`${reminder.active ? 'Desactivar' : 'Activar'} ${reminder.label}`} aria-pressed={reminder.active} onClick={() => setReminders((items) => items.map((item) => item.id === reminder.id ? { ...item, active: !item.active } : item))}><i /></button></div>)}<p className="card-footnote">En demo solo cambia la vista; no envía avisos.</p></article>
         <article className="next-visit-card"><span className="section-kicker">SOLICITUD DE CITA</span><h2>Consulta tu salud con un profesional.</h2><p>Esta tarjeta muestra el aspecto de una solicitud, sin una reserva real.</p><div className="visit-status"><span /> Sin cita real</div><Link to="/citas" className="side-link">Explorar solicitudes <ArrowRight size={15} /></Link></article>
+        <PatientPhotoTip />
         <Link to="/cuenta" className="sign-out-demo">Conectar tu cuenta real <ArrowUpRight size={15} /></Link>
       </aside></div>
     </div>
@@ -285,7 +294,7 @@ function LivePatientDashboard({ userId, email }: { userId: string; email: string
     <div className="profile-security-note"><ShieldCheck size={15} /><span>Tu información solo es visible para ti y el personal autorizado de la clínica. Para una cita, puedes indicar un correo de confirmación distinto.</span></div>
     <button className="profile-save-button" type="submit" disabled={profileSaving}>{profileSaving ? <><LoaderCircle size={16} className="profile-save-spinner" />Guardando…</> : <><Check size={16} />Guardar datos de contacto</>}</button>
   </form>
-</article></aside></div>}
+</article><PatientPhotoTip /></aside></div>}
     </div>
   )
 }
@@ -670,6 +679,7 @@ function AppointmentAccess({ prefill }: { prefill?: AppointmentPrefill }) {
       <span className="section-kicker">AGENDA PRIVADA</span>
       <h1>Inicia sesión para solicitar una cita.</h1>
       <p>Las solicitudes y los datos que compartas deben quedar asociados a tu cuenta para que puedas consultarlos de forma privada.</p>
+      <img className="appointment-access-photo" src="/images/dental-consultation.jpg" alt="Profesional dental conversa con una paciente en consulta" loading="lazy" />
       <Link className="button button-primary" to="/cuenta" state={{ from: '/citas', ...(prefill ? { appointmentPrefill: prefill } : {}) }}>Iniciar sesión o crear cuenta <ArrowRight size={17} /></Link>
       {!configured && <p className="card-footnote">La conexión de cuentas todavía está en modo demostración.</p>}
     </section>
@@ -690,6 +700,7 @@ function DemoClinicDashboard() {
     <DemoBanner />
     <div className="dashboard-heading"><div><span className="section-kicker">ESPACIO DE CLÍNICA · TRUJILLO</span><h1>Agenda de demostración.</h1><p>Datos ficticios para explorar la gestión de una clínica periodontal.</p></div><span className="secure-chip demo-secure"><Users size={16} /> Sin datos reales</span></div>
     <section className="clinic-profile-card clinic-dashboard-profile"><div className="clinic-profile-heading"><span className="clinic-avatar"><MapPin size={20} /></span><div><strong>Perioalert · Salud periodontal</strong><span>Trujillo, La Libertad, Perú · Ubicación simulada</span></div></div><div className="clinic-info-row"><Clock3 size={16} /><span><b>Lun–Vie</b> 9:00–13:00 y 15:00–18:00 · <b>Sábado</b> 9:00–13:00 · Domingo cerrado</span></div></section>
+    <ClinicCarePhotoNote />
     <div className="clinic-stats"><article><span>Solicitudes de ejemplo</span><b>{rows.filter((row) => row.status !== 'cancelled').length}</b><small>Reservas activas</small></article><article><span>Pendientes de revisar</span><b>{pending}</b><small>Esperan confirmación</small></article><article><span>Estado del sistema</span><b className="demo-live">DEMO</b><small>La agenda real requiere Supabase</small></article></div>
     <section className="clinic-table-card"><div className="card-heading"><div><span className="section-kicker">BANDEJA DE SOLICITUDES</span><h2>Próximas citas</h2></div><CalendarDays size={19} /></div>
       {rows.length ? <div className="clinic-table-wrap" role="region" tabIndex={0} aria-label="Agenda de citas; desliza horizontalmente para ver más columnas"><p className="clinic-table-hint">En celular, desliza la tabla para ver todas las columnas.</p><table className="clinic-table"><thead><tr><th>Paciente</th><th>Fecha</th><th>Hora</th><th>Motivo general</th><th>Estado</th><th>Acción</th></tr></thead><tbody>{rows.map((row) => <tr key={row.id}><td>{row.patient}<small>Registro ficticio</small></td><td>{formatClinicDate(row.date, { day: 'numeric', month: 'short', year: 'numeric' })}</td><td>{row.time}</td><td>{row.reason}</td><td><span className={`status-pill ${row.status}`}>{row.status === 'requested' ? 'Pendiente' : row.status === 'confirmed' ? 'Confirmada' : 'Cancelada'}</span></td><td>{row.status === 'requested' ? <><button className="table-action" type="button" onClick={() => setDemoStatus(row.id, 'confirmed')}>Confirmar</button><button className="table-action subtle-action" type="button" onClick={() => setDemoStatus(row.id, 'cancelled')}>Cancelar</button></> : row.status === 'confirmed' ? <button className="table-action subtle-action" type="button" onClick={() => setDemoStatus(row.id, 'cancelled')}>Cancelar cita</button> : <span className="card-footnote">Horario liberado</span>}</td></tr>)}</tbody></table></div> : <div className="empty-state"><CalendarDays size={25} /><h3>La agenda está vacía</h3><p>Las citas simuladas que solicites aparecerán aquí.</p><Link to="/citas" className="side-link">Crear cita de prueba <ArrowRight size={15} /></Link></div>}
@@ -750,6 +761,7 @@ function LiveClinicDashboard() {
   const pending = rows.filter((item) => item.status === 'requested').length
   return <div className="content-wrap portal-page clinic-page">
     <div className="dashboard-heading"><div><span className="section-kicker">ESPACIO DE CLÍNICA · TRUJILLO</span><h1>Gestión de citas.</h1><p>Las nuevas reservas se confirman automáticamente. Consulta la agenda, completa o libera horarios.</p></div><span className="secure-chip"><ShieldCheck size={16} /> Acceso autorizado</span></div>
+    <ClinicCarePhotoNote />
     {error && <FormMessage kind="error">{error}</FormMessage>}
     <div className="clinic-stats"><article><span>Solicitudes activas</span><b>{rows.filter((item) => item.status !== 'cancelled').length}</b><small>Horarios ocupados</small></article><article><span>Pendientes</span><b>{pending}</b><small>Esperan confirmación</small></article><article><span>Próximas fechas</span><b>{rows.filter((item) => item.requested_date >= clinicToday()).length}</b><small>Hora local de Trujillo</small></article></div>
     <section className="clinic-table-card">

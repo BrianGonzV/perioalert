@@ -19,8 +19,8 @@ const navItems = [
 function HeroPhoto() {
   return (
     <figure className="hero-photo">
-      <img src="/images/hero-brushing.jpg" alt="Una mujer se cepilla los dientes frente al espejo durante su rutina diaria" fetchPriority="high" />
-      <figcaption><Sparkles size={14} /> Cuidado en cada detalle</figcaption>
+      <img src="/images/hero-senior-brushing.jpg" alt="Una mujer mayor se cepilla los dientes frente al espejo" fetchPriority="high" />
+      <figcaption><Sparkles size={14} /> Cuidado diario a cualquier edad</figcaption>
     </figure>
   )
 }
@@ -117,8 +117,24 @@ function PeriodontitisPage() {
         </div>
         <p className="clinical-image-note"><ShieldCheck size={15} /> Ejemplos educativos; no sustituyen una revisión. Créditos: <a href="https://commons.wikimedia.org/wiki/File:Gingivitis.jpg" target="_blank" rel="noreferrer">Gingivitis, Roquex</a> (<a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank" rel="noreferrer">CC0 1.0</a>) · <a href="https://commons.wikimedia.org/wiki/File:Mirna_parodontitida.jpg" target="_blank" rel="noreferrer">Periodontitis leve, D-institut</a> (<a href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="noreferrer">CC BY 3.0</a>).</p>
       </section>
-      <aside className="periodontal-evaluation-photo"><figure><img src="/images/periodontal-evaluation.jpg" alt="Odontólogo explica una radiografía dental a una paciente" loading="lazy" /><figcaption>Fotografía referencial de una consulta</figcaption></figure><div><span className="section-kicker">LA EVALUACIÓN ES PERSONAL</span><h2>Una imagen orienta, el profesional evalúa.</h2><p>Las fotos de esta guía son ejemplos educativos. Un odontólogo examina las encías y los dientes para valorar cada caso.</p><Link className="text-link" to="/senales">Ver cuándo consultar <ArrowRight size={16} /></Link></div></aside>
-      <section className="progress-section"><div className="section-title-row compact"><div><span className="section-kicker">CAMBIOS QUE PUEDE EVALUAR UN PROFESIONAL</span><h2>De la inflamación<br />al cuidado oportuno.</h2></div><p>Las etapas no se determinan por una lista de síntomas. La revisión clínica es necesaria.</p></div><div className="progress-steps"><article><span>01</span><h3>Encías inflamadas</h3><p>Pueden verse enrojecidas, sensibles o sangrar con facilidad.</p></article><article><span>02</span><h3>Tejido de soporte</h3><p>La periodontitis puede afectar tejidos y hueso que sostienen los dientes.</p></article><article><span>03</span><h3>Evaluación y cuidado</h3><p>El profesional determina el estado de salud y las opciones de tratamiento.</p></article></div></section>
+      <aside className="periodontal-evaluation-photo"><div className="periodontal-evaluation-gallery"><figure><img src="/images/periodontal-evaluation.jpg" alt="Odontólogo explica una radiografía dental a una paciente" loading="lazy" /><figcaption>Conversación sobre una radiografía</figcaption></figure><figure><img src="/images/senior-dental-checkup.jpg" alt="Odontólogo revisa los dientes de un adulto mayor en consulta" loading="lazy" /><figcaption>Adulto mayor en una revisión dental</figcaption></figure></div><div><span className="section-kicker">LA EVALUACIÓN ES PERSONAL</span><h2>Una imagen orienta, el profesional evalúa.</h2><p>Las fotos de esta guía son ejemplos educativos. Un odontólogo examina las encías y los dientes para valorar cada caso.</p><Link className="text-link" to="/senales">Ver cuándo consultar <ArrowRight size={16} /></Link></div></aside>
+      <section className="periodontitis-visit-gallery" aria-labelledby="periodontitis-visit-gallery-title">
+        <div className="section-title-row compact">
+          <div><span className="section-kicker">EN CONSULTA</span><h2 id="periodontitis-visit-gallery-title">Revisión y orientación profesional.</h2></div>
+          <p>Estas imágenes muestran ejemplos de atención dental general; no permiten confirmar un diagnóstico periodontal.</p>
+        </div>
+        <div className="periodontitis-visit-grid">
+          <figure className="periodontitis-visit-card">
+            <img src="/images/dental-examination.jpg" alt="Profesional dental examina la boca de una paciente durante una consulta" loading="lazy" />
+            <figcaption><strong>Revisión odontológica</strong><span>Una exploración clínica ayuda a valorar cada caso.</span></figcaption>
+          </figure>
+          <figure className="periodontitis-visit-card">
+            <img src="/images/dental-consultation.jpg" alt="Odontólogo atiende a una paciente durante una consulta dental" loading="lazy" />
+            <figcaption><strong>Consulta profesional</strong><span>La conversación permite compartir cambios y dudas.</span></figcaption>
+          </figure>
+        </div>
+      </section>
+      <section className="progress-section"><div className="section-title-row compact"><div><span className="section-kicker">CAMBIOS QUE PUEDE EVALUAR UN PROFESIONAL</span><h2>De la inflamación<br />al cuidado oportuno.</h2></div><p>Las etapas no se determinan por una lista de síntomas. La revisión clínica es necesaria.</p></div><div className="progress-steps"><article><img className="progress-step-image" src="/images/gingivitis-clinical.jpg" alt="Fotografía clínica de gingivitis con encía inflamada" loading="lazy" /><div className="progress-step-copy"><span>01</span><h3>Encías inflamadas</h3><p>Pueden verse enrojecidas, sensibles o sangrar con facilidad.</p></div></article><article><img className="progress-step-image" src="/images/periodontitis-clinical-mild.jpg" alt="Fotografía clínica de periodontitis leve con recesión gingival" loading="lazy" /><div className="progress-step-copy"><span>02</span><h3>Tejido de soporte</h3><p>La periodontitis puede afectar tejidos y hueso que sostienen los dientes.</p></div></article><article><img className="progress-step-image" src="/images/dental-examination.jpg" alt="Profesional dental examina los dientes de una paciente" loading="lazy" /><div className="progress-step-copy"><span>03</span><h3>Evaluación y cuidado</h3><p>El profesional determina el estado de salud y las opciones de tratamiento.</p></div></article></div></section>
       <div className="page-next"><SourceNote /><Link className="button button-primary" to="/senales">Revisar señales <ArrowRight size={17} /></Link></div>
     </div>
   )
@@ -152,6 +168,7 @@ function HygienePage() {
   return (
     <div className="content-wrap inner-page">
       <PageHeading kicker="TU RUTINA, A TU RITMO" title="Hábitos sencillos para cada día." subtitle="Una rutina constante puede ayudarte a cuidar dientes y encías. Tu odontólogo puede adaptar las recomendaciones a tus necesidades." />
+      <section className="senior-routine-photo" aria-labelledby="senior-routine-title"><figure><img src="/images/hero-senior-brushing.jpg" alt="Mujer mayor realiza su cepillado diario frente al espejo" loading="lazy" /><figcaption>Rutina de higiene en casa</figcaption></figure><div><span className="section-kicker">PASO A PASO, A TU RITMO</span><h2 id="senior-routine-title">Una guía visual para acompañar tu rutina.</h2><p>Las demostraciones de abajo usan modelos dentales. Puedes seguirlas con calma y conversar con tu odontólogo si necesitas adaptar algún paso.</p></div></section>
       <BrushTimer />
       <section className="brushing-guide" aria-labelledby="brushing-guide-title">
         <div className="section-title-row compact"><div><span className="section-kicker">PASO A PASO, SIN APURARTE</span><h2 id="brushing-guide-title">Un recorrido completo<br />por toda tu sonrisa.</h2></div><p>Como guía general, usa un cepillo de cerdas suaves y pasta con flúor durante dos minutos, dos veces al día. Las fotos muestran demostraciones en modelos dentales.</p></div>

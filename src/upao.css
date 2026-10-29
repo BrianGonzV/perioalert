@@ -1,86 +1,88 @@
 :root{
-  --blue:#005FAE;
-  --blue-deep:#123b64;
-  --blue-ink:#0b2f50;
-  --mint:#b6d9f3;
-  --mint-pale:#edf6fc;
-  --paper:#fbfdff;
-  --warm:#f1f9fe;
+  --blue:#064b54;
+  --blue-deep:#123f49;
+  --blue-ink:#0b3038;
+  --mint:#83c7ce;
+  --mint-pale:#b5dce0;
+  --paper:#87bbc2;
+  --warm:#c4dfe3;
   --white:#fff;
-  --text:#22394f;
-  --muted:#5e7182;
-  --line:#dce8f1;
-  --upao-blue:#005FAE;
-  --upao-sky:#58BCEB;
-  --upao-health:#B6D9F3;
+  --card-surface:#a9d4d9;
+  --card-border:#72afb7;
+  --text:#183c43;
+  --muted:#25464d;
+  --line:#72afb7;
+  --upao-blue:#064b54;
+  --upao-sky:#4AB2BC;
+  --upao-health:#83c7ce;
   scroll-padding-top:88px;
 }
-body{font-family:'DM Sans',system-ui,sans-serif;font-size:16px;line-height:1.62;color:#22394f;background:#fbfdff}
+body{font-family:'DM Sans',system-ui,sans-serif;font-size:16px;line-height:1.62;color:#183c43;background:var(--paper)}
 h1,h2,h3,.brand{font-family:Manrope,system-ui,sans-serif}
-.site-header{background:rgba(251,253,255,.94);border-color:#dce8f1}
-.brand-icon{transform:none;background:#005FAE;border-radius:10px}
+.site-header{background:rgba(135,187,194,.97);border-color:#72afb7}
+.brand-icon{transform:none;background:#064b54;border-radius:10px}
 .brand-smile{transform:none}
-.brand-light{color:#5681a5}
-.site-nav{color:#4c6479}
-.site-nav>a:not(.nav-cta):hover,.site-nav>a.active:not(.nav-cta){color:#005FAE}
-.site-nav .active:not(.nav-cta):after{background:#58BCEB;height:3px}
-.nav-cta{background:#123b64}
-.nav-cta:hover{background:#005FAE}
-.eyebrow,.section-kicker{color:#005FAE}
-.eyebrow-dot{background:#58BCEB;box-shadow:0 0 0 4px #e4f4fc}
+.brand-light{color:#315b64}
+.site-nav{color:#25464d}
+.site-nav>a:not(.nav-cta):hover,.site-nav>a.active:not(.nav-cta){color:#064b54}
+.site-nav .active:not(.nav-cta):after{background:#4AB2BC;height:3px}
+.nav-cta{background:#123f49}
+.nav-cta:hover{background:#064b54}
+.eyebrow,.section-kicker{color:#064b54}
+.eyebrow-dot{background:#4AB2BC;box-shadow:0 0 0 4px #e4f4fc}
 .hero{min-height:675px;padding-top:52px;padding-bottom:82px}
-.hero h1{font-size:clamp(49px,5.15vw,72px);font-weight:760;line-height:1.08;letter-spacing:-.055em;color:#123b64}
-.hero h1 span{color:#005FAE;font-weight:650;letter-spacing:-.052em}
-.hero-lede{font-size:17px;line-height:1.78;color:#5e7182;max-width:475px}
-.hero-note{font-size:12px;color:#63798a}
-.button-primary{background:#005FAE;box-shadow:0 5px 14px rgba(0,95,174,.15)}
+.hero h1{font-size:clamp(49px,5.15vw,72px);font-weight:760;line-height:1.08;letter-spacing:-.055em;color:#123f49}
+.hero h1 span{color:#064b54;font-weight:650;letter-spacing:-.052em}
+.hero-lede{font-size:17px;line-height:1.78;color:#25464d;max-width:475px}
+.hero-note{font-size:12px;color:#25464d}
+.button-primary{background:#064b54;box-shadow:0 5px 14px rgba(0,95,174,.15)}
 .button-primary:hover{background:#034f8f;box-shadow:0 8px 19px rgba(0,95,174,.22)}
-.text-link{color:#123b64}
-.hero-index{color:#71869a}
-.hero-index>span:first-child{color:#005FAE;font-style:normal;font-weight:700}
+.text-link{color:#123f49}
+.hero-index{color:#25464d}
+.hero-index>span:first-child{color:#064b54;font-style:normal;font-weight:700}
 .index-rule{background:#88cbea}
-.welcome-band{background:#edf6fc}
-.welcome-mark{border-color:#b4d2e7;color:#005FAE;transform:none}
+.welcome-band{background:#b5dce0}
+.welcome-mark{border-color:#b4d2e7;color:#064b54;transform:none}
 .welcome-mark span{font-size:9px}
-.welcome-copy h2,.section-title-row h2,.article-content h2,.page-heading h1,.consult-card h2,.faq-page-intro h2,.contact-panel-copy h2,.timer-panel h2{color:#123b64;letter-spacing:-.045em}
+.welcome-copy h2,.section-title-row h2,.article-content h2,.page-heading h1,.consult-card h2,.faq-page-intro h2,.contact-panel-copy h2,.timer-panel h2{color:#123f49;letter-spacing:-.045em}
 .welcome-copy h2{font-size:clamp(34px,3.6vw,47px);line-height:1.12}
 .welcome-grid>p{font-size:15px;line-height:1.78}
 .section-title-row h2{font-size:clamp(37px,4.2vw,52px);line-height:1.08}
 .explore-section{padding-top:112px;padding-bottom:105px}
 .section-title-row>p{font-size:14px;line-height:1.8}
 .topic-card{border-radius:11px;min-height:350px}
-.topic-featured{background:linear-gradient(145deg,#005FAE 0%,#10487c 100%)}
-.topic-hygiene{background:#eaf4fb;color:#123b64}
-.topic-alert{background:#eaf4fb;color:#123b64}
+.topic-featured{background:var(--card-surface);color:#123f49}
+.topic-hygiene{background:var(--card-surface);color:#123f49}
+.topic-alert{background:var(--card-surface);color:#123f49}
 .topic-icon{border-radius:12px}
 .topic-featured .topic-icon{color:#fff;border-color:rgba(255,255,255,.48)}
-.topic-hygiene .topic-icon{color:#005FAE;background:#fff;border-color:#d8e8f4}
-.topic-alert .topic-icon{color:#00538f;background:#f6fbff;border-color:#cfe8f7}
+.topic-hygiene .topic-icon{color:#064b54;background:#d1e8ea;border-color:#72afb7}
+.topic-alert .topic-icon{color:#064b54;background:#d1e8ea;border-color:#72afb7}
 .topic-number{letter-spacing:1.35px}
 .topic-card h3{font-size:29px;line-height:1.14;letter-spacing:-.045em}
 .topic-card p{font-size:13px;line-height:1.72}
-.deco-rings{border-color:#c7e1f4;opacity:.23}
-.deco-sun{border-color:#5798c5;opacity:.2;box-shadow:0 0 0 18px rgba(0,95,174,.1),0 0 0 39px rgba(88,188,235,.08)}
-.deco-wave{border-color:#58BCEB;opacity:.25}
+.deco-rings{border-color:#d1e8ea;opacity:.23}
+.deco-sun{border-color:#4e9299;opacity:.2;box-shadow:0 0 0 18px rgba(6,75,84,.1),0 0 0 39px rgba(74,178,188,.08)}
+.deco-wave{border-color:#4AB2BC;opacity:.25}
 .member-section{padding-top:32px;padding-bottom:112px;display:grid;grid-template-columns:.85fr 1.15fr;gap:11%;align-items:center}
 .member-intro{max-width:425px}
-.member-intro h2{font-size:clamp(36px,4vw,49px);line-height:1.08;letter-spacing:-.052em;color:#123b64;margin:14px 0}
-.member-intro>p{font-size:14px;line-height:1.82;color:#5e7182;margin:0 0 20px}
+.member-intro h2{font-size:clamp(36px,4vw,49px);line-height:1.08;letter-spacing:-.052em;color:#123f49;margin:14px 0}
+.member-intro>p{font-size:14px;line-height:1.82;color:#25464d;margin:0 0 20px}
 .member-intro .button{margin-top:2px}
 .member-footnote{display:flex;align-items:center;gap:8px;color:#698091;font-size:10px;margin-top:19px}
-.member-footnote svg{color:#005FAE}
+.member-footnote svg{color:#064b54}
 .member-tools{border-top:1px solid #dce8f1}
 .member-tool{min-height:95px;display:grid;grid-template-columns:46px 1fr 22px;gap:17px;align-items:center;border-bottom:1px solid #dce8f1;padding:14px 5px;transition:padding .2s,color .2s}
-.member-tool:hover{padding-left:11px;color:#005FAE}
+.member-tool:hover{padding-left:11px;color:#064b54}
 .member-tool-icon{height:42px;width:42px;border-radius:13px;display:grid;place-items:center}
-.tool-blue{background:#e6f2fb;color:#005FAE}
+.tool-blue{background:#e6f2fb;color:#064b54}
 .tool-cyan{background:#e4f4fc;color:#00538f}
 .tool-sky{background:#edf6fc;color:#347dad}
 .member-tool>span:nth-child(2){display:flex;flex-direction:column;gap:4px}
 .member-tool b{font-family:Manrope,system-ui,sans-serif;font-weight:700;font-size:14px;color:#183f60}
 .member-tool small{font-size:12px;color:#6e8291}
 .member-tool>svg{color:#7a91a1}
-.home-cta{background:linear-gradient(115deg,#123b64 0%,#005FAE 100%);padding:81px 0 85px}
+.home-cta{background:linear-gradient(115deg,#123f49 0%,#064b54 100%);padding:81px 0 85px}
 .home-cta .section-kicker{color:#c7e8f8}
 .home-cta h2{font-size:clamp(40px,4.5vw,56px);line-height:1.08;letter-spacing:-.05em}
 .home-cta-inner>div:last-child>p{font-size:14px;line-height:1.82}
@@ -91,17 +93,17 @@ h1,h2,h3,.brand{font-family:Manrope,system-ui,sans-serif}
 .page-heading>p{font-size:16px;line-height:1.82;max-width:690px}
 .article-content h2{font-size:clamp(31px,3.5vw,42px);line-height:1.13}
 .article-content>p{font-size:15px;line-height:1.9}
-.callout{background:#edf6fc;border-left-color:#005FAE}
-.progress-steps article{border-top-color:#b6d9f3}
-.progress-steps h3,.routine-list h3,.signal-row h2{color:#123b64}
+.callout{background:#edf6fc;border-left-color:#064b54}
+.progress-steps article{border-top-color:#83c7ce}
+.progress-steps h3,.routine-list h3,.signal-row h2{color:#123f49}
 .progress-steps p,.routine-list p,.signal-row p,.faq-list details p{font-size:13px;line-height:1.78}
 .timer-panel{background:#eaf4fb;border:1px solid #d9eaf6;border-radius:11px}
-.timer-ring{border-color:#b6d9f3;color:#005FAE}
-.timer-button{background:#005FAE}
+.timer-ring{border-color:#83c7ce;color:#064b54}
+.timer-button{background:#064b54}
 .timer-button:hover{background:#034f8f}
 .routine-list article{min-height:122px}
 .signal-row{min-height:115px}
-.consult-card{background:linear-gradient(145deg,#123b64,#005FAE);border-radius:11px}
+.consult-card{background:linear-gradient(145deg,#123f49,#064b54);border-radius:11px}
 .consult-icon{color:#c7e8f8}
 .faq-list summary{font-size:14px;color:#244861}
 .contact-section,.contact-panel{background:#edf6fc}
@@ -112,29 +114,29 @@ h1,h2,h3,.brand{font-family:Manrope,system-ui,sans-serif}
 .source-note{font-size:11px}
 .demo-banner{background:#eaf4fb;border-color:#bfdff1;color:#315f81}
 .demo-chip{border-color:#9ccce5}
-.account-story,.next-visit-card{background:linear-gradient(145deg,#123b64,#005FAE)}
+.account-story,.next-visit-card{background:linear-gradient(145deg,#123f49,#064b54)}
 .account-story .section-kicker,.next-visit-card .section-kicker{color:#c7e8f8}
 .story-orbit{box-shadow:0 0 0 30px rgba(255,255,255,.04),0 0 0 65px rgba(255,255,255,.025)}
-.secure-chip{color:#005FAE;background:#edf6fc}
+.secure-chip{color:#064b54;background:#edf6fc}
 .today-card,.week-card,.side-card,.clinic-table-card,.booking-card,.clinic-stats article{border-color:#dce8f1;border-radius:9px;box-shadow:0 10px 28px rgba(19,59,100,.045)}
-.progress-ring{background:conic-gradient(#005FAE var(--progress),#e7f0f7 0)}
+.progress-ring{background:conic-gradient(#064b54 var(--progress),#e7f0f7 0)}
 .habit-check.is-done{background:#edf6fc;color:#194f78;border-color:#cfe3f2}
-.is-done .check-box{background:#005FAE;border-color:#005FAE}
-.week-bar-track i{background:#005FAE}
-.week-bar-col:nth-child(2n) .week-bar-track i{background:#58BCEB}
+.is-done .check-box{background:#064b54;border-color:#064b54}
+.week-bar-track i{background:#064b54}
+.week-bar-col:nth-child(2n) .week-bar-track i{background:#4AB2BC}
 .topic-card,.today-card,.week-card,.side-card,.clinic-table-card,.booking-card{transition:box-shadow .22s,transform .22s}
 .topic-card:hover,.today-card:hover,.week-card:hover,.side-card:hover,.clinic-table-card:hover,.booking-card:hover{box-shadow:0 16px 34px rgba(19,59,100,.08)}
-.clinic-stats article{border-top:3px solid #b6d9f3}
-.clinic-stats article:nth-child(2){border-top-color:#58BCEB}
-.clinic-stats article:nth-child(3){border-top-color:#005FAE}
+.clinic-stats article{border-top:3px solid #83c7ce}
+.clinic-stats article:nth-child(2){border-top-color:#4AB2BC}
+.clinic-stats article:nth-child(3){border-top-color:#064b54}
 .clinic-stats .demo-live{color:#00538f}
 .table-action{background:#e8f2fa;color:#00538f}
 .table-action:hover{background:#d8eafa}
-.add-reminder-button{border-color:#b6d9f3;background:#f6fbff;color:#005FAE}
+.add-reminder-button{border-color:#83c7ce;background:#f6fbff;color:#064b54}
 .add-reminder-button:hover{background:#eaf4fb}
 .sign-out-button:hover{color:#c7e8f8}
 .member-section .section-kicker{letter-spacing:1.55px}
-:focus-visible{outline:3px solid #005FAE;outline-offset:4px;border-radius:4px}
+:focus-visible{outline:3px solid #064b54;outline-offset:4px;border-radius:4px}
 @media(max-width:1000px){.hero{min-height:610px}.member-section{gap:7%}}
 @media(max-width:760px){
   .hero{padding-top:49px;padding-bottom:69px}
@@ -159,61 +161,61 @@ h1,h2,h3,.brand{font-family:Manrope,system-ui,sans-serif}
 /* Contrast and keyboard focus improvements for small supporting text. */
 .account-privacy,.card-footnote,.empty-copy{color:#526a7d}
 .brand-light{color:#456f94}
-.hero-note,.hero-index,.page-aside,.source-note,.timer-reset,.routine-no,.signal-no,.member-footnote,.member-tool small,.week-bar-col,.clinic-footer-note,.clinic-stats article>span,.clinic-stats article small,.request-row>span:last-child,.loading-panel,.empty-state{color:#526a7d}
+.hero-note,.hero-index,.page-aside,.source-note,.timer-reset,.routine-no,.signal-no,.member-footnote,.member-tool small,.week-bar-col,.clinic-footer-note,.clinic-stats article>span,.clinic-stats article small,.request-row>span:last-child,.loading-panel,.empty-state{color:#25464d}
 .week-badge{color:#315f81;background:#eaf4fb}
-.clinic-footer-note>svg,.account-privacy svg{color:#005FAE}
+.clinic-footer-note>svg,.account-privacy svg{color:#064b54}
 .sign-out-demo{color:#526a7d}
 .clinic-stats .demo-live{color:#315f81}
 .clinic-table th{color:#526a7d}
 .clinic-table td small{color:#526a7d}
 .booking-trust{color:#315f81}
 .request-row{color:#415b70}
-.booking-card input:not([type=checkbox]),.booking-card select,.filter-select{border-color:#aebfd0;color:#123b64}
-.booking-card input:focus-visible,.booking-card select:focus-visible,.filter-select:focus-visible{outline-color:#005FAE}
+.booking-card input:not([type=checkbox]),.booking-card select,.filter-select{border-color:#aebfd0;color:#123f49}
+.booking-card input:focus-visible,.booking-card select:focus-visible,.filter-select:focus-visible{outline-color:#064b54}
 .form-message.error{color:#87372f}
 .form-message{color:#315f81}
 
-.booking-intro h1{color:#123b64}
+.booking-intro h1{color:#123f49}
 .booking-profile-card,.clinic-profile-card{background:linear-gradient(145deg,#fff 0%,#f3f9fe 100%);border:1px solid #d4e4f1;border-radius:12px;box-shadow:0 14px 34px rgba(18,59,100,.065)}
 .clinic-profile-card{padding:19px 20px;margin-top:24px;max-width:460px}
 .clinic-profile-heading{display:flex;align-items:center;gap:12px}
 .clinic-profile-heading>div{display:flex;flex-direction:column;gap:3px}
-.clinic-profile-heading strong{font-family:Manrope,system-ui,sans-serif;font-size:14px;color:#123b64}
+.clinic-profile-heading strong{font-family:Manrope,system-ui,sans-serif;font-size:14px;color:#123f49}
 .clinic-profile-heading span{font-size:11px;color:#526a7d}
-.clinic-avatar{width:40px;height:40px;display:grid;place-items:center;flex:none;border-radius:12px;background:#e3f1fb;color:#005FAE}
+.clinic-avatar{width:40px;height:40px;display:grid;place-items:center;flex:none;border-radius:12px;background:#e3f1fb;color:#064b54}
 .clinic-info-row{display:flex;align-items:flex-start;gap:10px;padding-top:15px;margin-top:14px;border-top:1px solid #dbe8f2;color:#526a7d;font-size:11px;line-height:1.75}
-.clinic-info-row svg{flex:none;color:#005FAE;margin-top:2px}
-.clinic-info-row b{color:#123b64}
+.clinic-info-row svg{flex:none;color:#064b54;margin-top:2px}
+.clinic-info-row b{color:#123f49}
 .clinic-profile-card>p{color:#526a7d;font-size:10px;line-height:1.6;margin:12px 0 0}
 .clinic-dashboard-profile{max-width:none;margin:0 0 20px}
 .booking-form-heading{display:flex;align-items:center;justify-content:space-between;gap:12px}
 .booking-form-heading h2{margin-top:7px}
-.booking-step{width:40px;height:40px;display:grid;place-items:center;border-radius:13px;background:#eaf4fb;color:#005FAE;flex:none}
+.booking-step{width:40px;height:40px;display:grid;place-items:center;border-radius:13px;background:#eaf4fb;color:#064b54;flex:none}
 .booking-date-fieldset,.booking-time-fieldset{width:100%;padding:0;margin:0;border:0;min-width:0}
-.booking-date-fieldset legend,.booking-time-fieldset legend{width:100%;margin-bottom:9px;color:#123b64;font-size:12px;font-weight:700}
+.booking-date-fieldset legend,.booking-time-fieldset legend{width:100%;margin-bottom:9px;color:#123f49;font-size:12px;font-weight:700}
 .booking-time-fieldset legend{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
 .booking-time-fieldset legend small{font-size:10px;font-weight:500;color:#526a7d;text-align:right}
 .booking-date-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:7px}
-.booking-date-option,.booking-time-option{font:inherit;color:#123b64;background:#fff;border:1px solid #c1d1df;border-radius:8px;cursor:pointer;transition:background .18s,border-color .18s,transform .18s,box-shadow .18s}
+.booking-date-option,.booking-time-option{font:inherit;color:#123f49;background:#fff;border:1px solid #c1d1df;border-radius:8px;cursor:pointer;transition:background .18s,border-color .18s,transform .18s,box-shadow .18s}
 .booking-date-option{min-height:77px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:6px 2px}
 .booking-date-option span,.booking-date-option small{font-size:9px;color:#526a7d;text-transform:capitalize}
 .booking-date-option strong{font-family:Manrope,system-ui,sans-serif;font-size:19px;line-height:1.2}
-.booking-date-option:hover,.booking-time-option:hover{border-color:#005FAE;background:#f1f8fd;transform:translateY(-1px)}
-.booking-date-option.selected,.booking-time-option.selected{background:#123b64;border-color:#123b64;box-shadow:inset 0 -3px #58BCEB;color:#fff}
+.booking-date-option:hover,.booking-time-option:hover{border-color:#064b54;background:#f1f8fd;transform:translateY(-1px)}
+.booking-date-option.selected,.booking-time-option.selected{background:#123f49;border-color:#123f49;box-shadow:inset 0 -3px #4AB2BC;color:#fff}
 .booking-date-option.selected span,.booking-date-option.selected small{color:#e4f0fa}
 .booking-time-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
 .booking-time-option{min-height:45px;display:inline-flex;align-items:center;justify-content:center;gap:7px;font-size:12px;font-weight:700}
-.booking-time-option svg{color:#005FAE}
+.booking-time-option svg{color:#064b54}
 .booking-time-option.selected svg{color:#c7e8f8}
 .slot-message{border-radius:8px;padding:14px;background:#f0f6fb;color:#415b70;font-size:11px;line-height:1.55}
 .slot-error{background:#fff3ef;color:#87372f}
 .slot-error button{display:inline-block;margin-left:7px;padding:3px 5px;color:#00538f;background:transparent;border:0;text-decoration:underline;font:inherit;font-weight:700;cursor:pointer}
-.booking-card-label{display:flex;flex-direction:column;gap:7px;color:#123b64;font-size:12px;font-weight:700}
+.booking-card-label{display:flex;flex-direction:column;gap:7px;color:#123f49;font-size:12px;font-weight:700}
 .booking-confirmation{display:flex;flex-direction:column;align-items:flex-start;gap:9px;padding:17px;border:1px solid #bcdcc9;border-radius:10px;background:#f0f8f2;color:#285d46}
 .confirmation-check{width:44px;height:44px;display:grid;place-items:center;border-radius:50%;background:#dff1e5;color:#24704a}
-.booking-confirmation strong{color:#123b64;font-family:Manrope,system-ui,sans-serif;font-size:17px;text-transform:capitalize}
+.booking-confirmation strong{color:#123f49;font-family:Manrope,system-ui,sans-serif;font-size:17px;text-transform:capitalize}
 .booking-confirmation p{margin:0 0 8px;color:#415b70;font-size:12px;line-height:1.6}
-.button-secondary{background:#eaf4fb;color:#123b64;border:1px solid #c7dceb}
+.button-secondary{background:#eaf4fb;color:#123f49;border:1px solid #c7dceb}
 .button-secondary:hover{background:#dcecf8}
 .clinic-table-controls{display:flex;align-items:center;gap:8px}
 .subtle-action{background:#fff1ed;color:#87372f;margin-left:4px}
@@ -222,36 +224,36 @@ h1,h2,h3,.brand{font-family:Manrope,system-ui,sans-serif}
 .clinic-stats article small{color:#526a7d}
 .demo-banner{color:#315f81}
 .demo-banner span{color:#315f81}
-:focus-visible{outline:3px solid #005FAE;outline-offset:3px;box-shadow:0 0 0 2px #fff}
-.topic-featured :focus-visible,.home-cta :focus-visible,.account-story :focus-visible,.next-visit-card :focus-visible,.site-footer :focus-visible{outline-color:#c7e8f8;box-shadow:0 0 0 2px #123b64}
-.booking-card textarea{width:100%;resize:vertical;min-height:105px;padding:11px 12px;border:1px solid #aebfd0;border-radius:7px;color:#123b64;background:#fff;font:inherit;font-size:12px;line-height:1.6}
+:focus-visible{outline:3px solid #064b54;outline-offset:3px;box-shadow:0 0 0 2px #fff}
+.topic-featured :focus-visible,.home-cta :focus-visible,.account-story :focus-visible,.next-visit-card :focus-visible,.site-footer :focus-visible{outline-color:#c7e8f8;box-shadow:0 0 0 2px #123f49}
+.booking-card textarea{width:100%;resize:vertical;min-height:105px;padding:11px 12px;border:1px solid #aebfd0;border-radius:7px;color:#123f49;background:#fff;font:inherit;font-size:12px;line-height:1.6}
 .booking-card textarea::placeholder{color:#526a7d;opacity:1}
-.booking-card textarea:focus-visible{outline-color:#005FAE}
+.booking-card textarea:focus-visible{outline-color:#064b54}
 .optional-label{font-size:10px;font-weight:500;color:#526a7d}
 .appointment-upload{display:flex;flex-direction:column;gap:11px;padding:14px;border:1px dashed #9dbbd2;border-radius:9px;background:#f7fbff}
 .appointment-upload>div:first-child{display:flex;flex-direction:column;gap:3px}
-.appointment-upload>div:first-child strong{font-size:12px;color:#123b64}
+.appointment-upload>div:first-child strong{font-size:12px;color:#123f49}
 .appointment-upload>div:first-child span{font-size:10px;color:#526a7d}
 .appointment-upload-button{width:max-content;max-width:100%;display:inline-flex;align-items:center;gap:8px;padding:9px 11px;border:1px solid #b7cfe1;border-radius:7px;background:#fff;color:#00538f;font-size:11px;font-weight:700;cursor:pointer}
-.appointment-upload-button:hover{background:#eef7fd;border-color:#005FAE}
+.appointment-upload-button:hover{background:#eef7fd;border-color:#064b54}
 .appointment-upload-button input{min-width:0;max-width:235px;color:#415b70;font:inherit;font-size:10px}
-.appointment-upload-button input::file-selector-button{margin-right:7px;padding:6px 8px;border:0;border-radius:4px;background:#eaf4fb;color:#123b64;font:inherit;font-weight:700;cursor:pointer}
+.appointment-upload-button input::file-selector-button{margin-right:7px;padding:6px 8px;border:0;border-radius:4px;background:#eaf4fb;color:#123f49;font:inherit;font-weight:700;cursor:pointer}
 .appointment-photo-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
 .appointment-photo-preview{min-width:0;display:grid;grid-template-columns:42px minmax(0,1fr) 27px;align-items:center;gap:7px;padding:5px;border:1px solid #d4e4f1;border-radius:7px;background:#fff}
 .appointment-photo-preview img{width:42px;height:38px;object-fit:cover;border-radius:4px;background:#edf4f9}
 .appointment-photo-preview span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#415b70;font-size:9px}
 .appointment-photo-preview button{width:26px;height:26px;display:grid;place-items:center;border:0;border-radius:5px;background:#fff1ed;color:#87372f;cursor:pointer}
 .private-intake-prompt{display:grid;grid-template-columns:20px 1fr;gap:5px 9px;padding:13px;border:1px solid #c5dce9;border-radius:8px;background:#f0f7fc;color:#415b70;font-size:11px;line-height:1.6}
-.private-intake-prompt>svg{color:#005FAE}
+.private-intake-prompt>svg{color:#064b54}
 .private-intake-prompt a{grid-column:2;display:inline-flex;align-items:center;gap:6px;color:#00538f;font-weight:700;text-decoration:underline;text-underline-offset:2px}
-.booking-email-notice{display:flex;flex-direction:column;gap:8px;width:100%;padding:11px 12px;border:1px solid #b6d9f3;border-radius:7px;background:#f1f9fe;color:#315f81;font-size:11px;line-height:1.5}
+.booking-email-notice{display:flex;flex-direction:column;gap:8px;width:100%;padding:11px 12px;border:1px solid #83c7ce;border-radius:7px;background:#f1f9fe;color:#315f81;font-size:11px;line-height:1.5}
 .booking-email-notice>span{display:flex;align-items:flex-start;gap:8px}
 .booking-email-notice svg{flex:none}
 .booking-email-notice.failed{border-color:#e5c4bd;background:#fff3ef;color:#87372f}
 .booking-email-notice button{align-self:flex-start;padding:6px 9px;border:1px solid currentColor;border-radius:5px;background:#fff;color:#87372f;font:inherit;font-weight:700;cursor:pointer}
 .booking-email-notice button:disabled{opacity:.65;cursor:wait}
 .privacy-notice-card{max-width:850px;margin-inline:auto;padding:clamp(20px,4vw,38px);border:1px solid #d4e4f1;border-radius:12px;background:#fff;box-shadow:0 14px 34px rgba(18,59,100,.055)}
-.privacy-notice-card h2{margin:25px 0 8px;color:#123b64;font-family:Manrope,system-ui,sans-serif;font-size:20px;letter-spacing:-.5px}
+.privacy-notice-card h2{margin:25px 0 8px;color:#123f49;font-family:Manrope,system-ui,sans-serif;font-size:20px;letter-spacing:-.5px}
 .privacy-notice-card h2:first-of-type{margin-top:27px}
 .privacy-notice-card p{color:#415b70;font-size:13px;line-height:1.75}
 .privacy-demo-warning{display:flex;align-items:flex-start;gap:12px;padding:15px;border:1px solid #c7e1f4;border-radius:8px;background:#eff8fd;color:#315f81}
@@ -268,7 +270,7 @@ h1,h2,h3,.brand{font-family:Manrope,system-ui,sans-serif}
 .clinic-table{min-width:760px}
 .clinic-table-live{min-width:1120px}
 .clinic-table-wrap{max-width:100%;overflow-x:auto;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch}
-.clinic-table-wrap:focus-visible{outline:3px solid #005FAE;outline-offset:3px}
+.clinic-table-wrap:focus-visible{outline:3px solid #064b54;outline-offset:3px}
 .clinic-table-hint{display:none}
 @media(max-width:760px){
   .appointment-photo-list{grid-template-columns:1fr}
@@ -313,28 +315,28 @@ h1,h2,h3,.brand{font-family:Manrope,system-ui,sans-serif}
 
 /* Appointment access gate and UPAO blue palette. */
 .appointment-access-card{max-width:720px;margin:clamp(28px,8vh,88px) auto;padding:clamp(24px,5vw,54px);border:1px solid #c7e1f4;border-radius:14px;background:linear-gradient(145deg,#fff 0%,#f1f9fe 100%);box-shadow:0 18px 48px rgba(18,59,100,.08)}
-.appointment-access-card h1{max-width:560px;margin:13px 0;color:#123b64;font-family:Manrope,system-ui,sans-serif;font-size:clamp(34px,5vw,54px);line-height:1.1;letter-spacing:-.045em}
+.appointment-access-card h1{max-width:560px;margin:13px 0;color:#123f49;font-family:Manrope,system-ui,sans-serif;font-size:clamp(34px,5vw,54px);line-height:1.1;letter-spacing:-.045em}
 .appointment-access-card>p:not(.card-footnote){max-width:560px;margin:0 0 22px;color:#526a7d;font-size:15px;line-height:1.75}
 @media(max-width:760px){.appointment-access-card{margin:15px auto;padding:24px 20px}.appointment-access-card h1{font-size:clamp(32px,9vw,43px)}.appointment-access-card>p:not(.card-footnote){font-size:14px}}
 .timer-done{color:#00538f}
-.routine-list article>svg{color:#58BCEB}
-.confirmation-check{background:#eaf4fb;color:#005FAE}
+.routine-list article>svg{color:#4AB2BC}
+.confirmation-check{background:#eaf4fb;color:#064b54}
 
 .demo-date{color:#315f81;background:#eaf4fb}
-.habit-check:hover{background:#f4faff;border-color:#b6d9f3}
-.check-box{border-color:#b6d9f3}
-.card-heading>svg{color:#58BCEB}
+.habit-check:hover{background:#f4faff;border-color:#83c7ce}
+.check-box{border-color:#83c7ce}
+.card-heading>svg{color:#4AB2BC}
 
 /* Appointment identity details */
 .booking-personal-fields{display:flex;flex-direction:column;gap:12px;padding:17px;border:1px solid #d4e9f7;border-radius:8px;background:linear-gradient(145deg,#fff 0%,#f5fbff 100%)}
 .booking-personal-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:1px}
-.booking-personal-heading h3{margin:5px 0 0;color:#123b64;font-family:Manrope,system-ui,sans-serif;font-size:16px;letter-spacing:-.35px}
+.booking-personal-heading h3{margin:5px 0 0;color:#123f49;font-family:Manrope,system-ui,sans-serif;font-size:16px;letter-spacing:-.35px}
 .booking-personal-heading>svg{flex:none;color:#1687b5}
 .booking-identity-grid{display:grid;grid-template-columns:minmax(0,.75fr) minmax(0,1.25fr);gap:12px}
 .booking-personal-fields .booking-card-label{min-width:0}
 .booking-personal-fields input{min-width:0}
 .profile-load-note,.profile-data-note{margin:0;color:#526a7d;font-size:10px;line-height:1.6}
-.profile-data-note{padding-left:10px;border-left:2px solid #58BCEB}
+.profile-data-note{padding-left:10px;border-left:2px solid #4AB2BC}
 .profile-error-row{display:flex;flex-direction:column;align-items:flex-start;gap:7px}
 .profile-retry-button{border:0;padding:2px 0;background:none;color:#00538f;font:inherit;font-size:10px;font-weight:700;text-decoration:underline;cursor:pointer}
 .clinic-table-live{min-width:1220px}
@@ -346,7 +348,7 @@ h1,h2,h3,.brand{font-family:Manrope,system-ui,sans-serif}
 .profile-card-avatar{width:42px;height:42px;display:grid;place-items:center;border:1px solid #cbe4f4;border-radius:12px;background:#fff;color:#0877b8;box-shadow:0 4px 12px rgba(18,59,100,.06)}
 .profile-card-title{min-width:0}
 .profile-card-title .section-kicker{font-size:8px;color:#0877b8}
-.profile-card-title h2{margin:4px 0 2px;color:#123b64;font-family:Manrope,system-ui,sans-serif;font-size:17px;letter-spacing:-.45px}
+.profile-card-title h2{margin:4px 0 2px;color:#123f49;font-family:Manrope,system-ui,sans-serif;font-size:17px;letter-spacing:-.45px}
 .profile-card-title p{margin:0;color:#5d7488;font-size:10px;line-height:1.5}
 .profile-private-badge{display:inline-flex;align-items:center;gap:5px;padding:6px 8px;border:1px solid #cfe5f3;border-radius:20px;background:#fff;color:#176b9d;font-size:9px;font-weight:700;white-space:nowrap}
 .profile-account-email{display:grid;grid-template-columns:30px minmax(0,1fr) 20px;align-items:center;gap:10px;margin:15px 18px 0;padding:11px 12px;border:1px solid #dfedf6;border-radius:8px;background:#f8fbfe}
@@ -360,7 +362,7 @@ h1,h2,h3,.brand{font-family:Manrope,system-ui,sans-serif}
 .profile-field-heading{display:flex;align-items:center;gap:6px;color:#315974}
 .profile-field-heading>svg{color:#1384b8}
 .profile-optional{margin-left:auto;color:#74899a;font-size:9px;font-weight:500}
-.profile-form input{width:100%;min-height:43px;padding:0 12px;border:1px solid #d3e2ec;border-radius:7px;background:#fff;color:#123b64;font:inherit;font-size:12px;transition:border-color .18s,box-shadow .18s,background .18s}
+.profile-form input{width:100%;min-height:43px;padding:0 12px;border:1px solid #d3e2ec;border-radius:7px;background:#fff;color:#123f49;font:inherit;font-size:12px;transition:border-color .18s,box-shadow .18s,background .18s}
 .profile-form input::placeholder{color:#9baebc}
 .profile-form input:hover{border-color:#a8cfe5}
 .profile-form input:focus{outline:0;border-color:#1687b5;background:#fcfeff;box-shadow:0 0 0 3px rgba(88,188,235,.18)}
@@ -382,22 +384,22 @@ h1,h2,h3,.brand{font-family:Manrope,system-ui,sans-serif}
 .brushing-stage-card{overflow:hidden;border:1px solid #d9e9f4;border-radius:14px;background:#fff;box-shadow:0 12px 28px rgba(18,59,100,.045);transition:transform .24s,box-shadow .24s}
 .brushing-stage-card:hover{transform:translateY(-3px);box-shadow:0 17px 34px rgba(18,59,100,.09)}
 .brushing-stage-figure{position:relative;padding:10px 10px 0;background:linear-gradient(145deg,#f2f9fe,#e9f5fc)}
-.brushing-stage-count{position:absolute;right:20px;top:20px;width:31px;height:31px;display:grid;place-items:center;border:1px solid #c6e3f3;border-radius:50%;background:#fff;color:#005FAE;font-family:Manrope,system-ui,sans-serif;font-size:10px;font-weight:800;box-shadow:0 4px 11px rgba(18,59,100,.07)}
+.brushing-stage-count{position:absolute;right:20px;top:20px;width:31px;height:31px;display:grid;place-items:center;border:1px solid #c6e3f3;border-radius:50%;background:#fff;color:#064b54;font-family:Manrope,system-ui,sans-serif;font-size:10px;font-weight:800;box-shadow:0 4px 11px rgba(18,59,100,.07)}
 .brushing-stage-copy{padding:18px 19px 20px}
 .brushing-stage-tag{display:inline-block;padding:5px 8px;border-radius:20px;background:#eaf5fc;color:#176b9d;font-size:9px;font-weight:700;letter-spacing:.4px}
-.brushing-stage-copy h3{margin:10px 0 6px;color:#123b64;font-size:17px;letter-spacing:-.35px;line-height:1.35}
+.brushing-stage-copy h3{margin:10px 0 6px;color:#123f49;font-size:17px;letter-spacing:-.35px;line-height:1.35}
 .brushing-stage-copy p{margin:0;color:#526d82;font-size:12px;line-height:1.7}
-.brushing-personal-note{display:flex;align-items:flex-start;gap:9px;max-width:780px;margin:18px 0 0;padding:13px 15px;border-left:3px solid #58BCEB;border-radius:0 8px 8px 0;background:#f0f8fd;color:#496981;font-size:11px;line-height:1.6}
+.brushing-personal-note{display:flex;align-items:flex-start;gap:9px;max-width:780px;margin:18px 0 0;padding:13px 15px;border-left:3px solid #4AB2BC;border-radius:0 8px 8px 0;background:#f0f8fd;color:#496981;font-size:11px;line-height:1.6}
 .brushing-personal-note svg{flex:none;color:#0877b8}
 .hygiene-video-card{display:grid;grid-template-columns:.72fr 1.28fr;align-items:center;gap:30px;margin:68px 0 28px;padding:25px;border:1px solid #d7e9f5;border-radius:16px;background:linear-gradient(135deg,#eef8fe 0%,#f8fcff 70%,#e7f5fc 100%);box-shadow:0 18px 38px rgba(18,59,100,.06)}
 .hygiene-video-copy{padding:5px 0 5px 4px}
-.hygiene-video-copy h2{margin:10px 0;color:#123b64;font-family:Manrope,system-ui,sans-serif;font-size:clamp(27px,3.1vw,39px);line-height:1.12;letter-spacing:-.05em}
+.hygiene-video-copy h2{margin:10px 0;color:#123f49;font-family:Manrope,system-ui,sans-serif;font-size:clamp(27px,3.1vw,39px);line-height:1.12;letter-spacing:-.05em}
 .hygiene-video-copy p{margin:0;color:#526d82;font-size:12px;line-height:1.75}
-.hygiene-video-source{display:inline-flex;align-items:center;gap:6px;margin-top:15px;color:#005FAE;font-size:10px;font-weight:700}
+.hygiene-video-source{display:inline-flex;align-items:center;gap:6px;margin-top:15px;color:#064b54;font-size:10px;font-weight:700}
 .hygiene-video-frame{position:relative;overflow:hidden;aspect-ratio:16/9;border:1px solid #c6dfef;border-radius:12px;background:#dcecf7;box-shadow:0 10px 26px rgba(18,59,100,.11)}
 .hygiene-video-frame iframe{display:block;width:100%;height:100%;border:0}
 .video-caption{position:absolute;left:11px;bottom:11px;display:inline-flex;align-items:center;gap:6px;padding:6px 9px;border:1px solid rgba(255,255,255,.65);border-radius:20px;background:rgba(255,255,255,.9);color:#194f78;font-size:9px;font-weight:700;pointer-events:none}
-.video-caption svg{color:#005FAE}
+.video-caption svg{color:#064b54}
 
 /* Gum-condition comparison and progressive detail */
 .condition-explorer{margin:70px 0 0;padding:45px 0 10px;border-top:1px solid #dce8f1}
@@ -408,46 +410,46 @@ h1,h2,h3,.brand{font-family:Manrope,system-ui,sans-serif}
 .condition-figure-caption{position:absolute;right:19px;bottom:19px;padding:6px 9px;border:1px solid #d4e8f4;border-radius:20px;background:rgba(255,255,255,.92);color:#406783;font-size:8px;font-weight:700}
 .condition-card-content{display:flex;flex-direction:column;align-items:flex-start;padding:19px 20px 20px}
 .condition-kicker{color:#0877b8;font-size:8px;font-weight:800;letter-spacing:1.05px}
-.condition-card-content h3{margin:7px 0;color:#123b64;font-family:Manrope,system-ui,sans-serif;font-size:23px;letter-spacing:-.6px}
+.condition-card-content h3{margin:7px 0;color:#123f49;font-family:Manrope,system-ui,sans-serif;font-size:23px;letter-spacing:-.6px}
 .condition-card-content>p{margin:0;color:#526d82;font-size:11px;line-height:1.75}
 .condition-more{width:100%;margin-top:14px;border-top:1px solid #e1edf5;border-bottom:1px solid #e1edf5}
-.condition-more summary{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:43px;color:#005FAE;font-size:10px;font-weight:800;cursor:pointer;list-style:none}
+.condition-more summary{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:43px;color:#064b54;font-size:10px;font-weight:800;cursor:pointer;list-style:none}
 .condition-more summary::-webkit-details-marker{display:none}
 .condition-more summary svg{flex:none;transition:rotate .2s}
 .condition-more[open] summary svg{rotate:180deg}
 .condition-more>div{padding:0 0 13px;color:#526d82;font-size:10px;line-height:1.7}
 .condition-more>div p{margin:0 0 8px}
-.condition-more>div a{display:inline-flex;align-items:center;gap:5px;color:#005FAE;font-weight:700}
+.condition-more>div a{display:inline-flex;align-items:center;gap:5px;color:#064b54;font-weight:700}
 .condition-cta{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;min-height:42px;margin-top:14px;padding:0 12px;border:1px solid #b8dced;border-radius:8px;background:#eff8fd;color:#00538f;font-size:10px;font-weight:800;transition:background .18s,border-color .18s,transform .18s}
-.condition-cta:hover{transform:translateY(-1px);border-color:#58BCEB;background:#e4f4fc}
+.condition-cta:hover{transform:translateY(-1px);border-color:#4AB2BC;background:#e4f4fc}
 .condition-cta svg{flex:none}
 .condition-source-note{display:flex;align-items:flex-start;gap:7px;margin:18px 0 0;color:#5b7488;font-size:9px;line-height:1.6}
 .condition-source-note svg{flex:none;color:#1687b5}
-.condition-source-note a{color:#005FAE;text-decoration:underline;text-underline-offset:2px}
+.condition-source-note a{color:#064b54;text-decoration:underline;text-underline-offset:2px}
 
 /* Premium mobile navigation drawer */
 .mobile-nav-intro,.mobile-nav-footer,.nav-mobile-index,.nav-mobile-arrow,.mobile-menu-backdrop{display:none}
 @media(max-width:760px){
   .site-header{z-index:50;height:70px}
   .nav-wrap{position:relative}
-  .menu-toggle{display:grid;place-items:center;width:44px;height:44px;padding:0;border:1px solid #d5e7f3;border-radius:13px;background:#fff;color:#123b64;box-shadow:0 4px 13px rgba(18,59,100,.06);transition:background .2s,border-color .2s,transform .2s}
+  .menu-toggle{display:grid;place-items:center;width:44px;height:44px;padding:0;border:1px solid #d5e7f3;border-radius:13px;background:#fff;color:#123f49;box-shadow:0 4px 13px rgba(18,59,100,.06);transition:background .2s,border-color .2s,transform .2s}
   .menu-toggle:active{transform:scale(.95)}
-  .menu-toggle.is-open{border-color:#b6d9f3;background:#eaf5fc;color:#005FAE}
+  .menu-toggle.is-open{border-color:#83c7ce;background:#eaf5fc;color:#064b54}
   .mobile-menu-backdrop{display:block;position:fixed;inset:70px 0 0;z-index:45;border:0;background:rgba(13,42,67,.28);backdrop-filter:blur(3px);animation:menu-backdrop-in .2s ease-out both}
   .site-nav{display:flex;visibility:hidden;pointer-events:none;position:absolute;z-index:51;top:calc(100% + 8px);left:0;right:0;width:100%;max-height:calc(100dvh - 96px);overflow-y:auto;overscroll-behavior:contain;flex-direction:column;align-items:stretch;gap:5px;padding:15px;border:1px solid #d6e8f4;border-radius:17px;background:rgba(255,255,255,.98);box-shadow:0 24px 54px rgba(12,44,73,.19),0 3px 8px rgba(12,44,73,.06);opacity:0;transform:translateY(-9px) scale(.985);transform-origin:top right;transition:opacity .2s ease,transform .24s cubic-bezier(.2,.75,.25,1),visibility .2s}
   .site-nav.is-open{visibility:visible;pointer-events:auto;opacity:1;transform:translateY(0) scale(1)}
   .mobile-nav-intro{display:flex;flex-direction:column;gap:3px;padding:3px 6px 11px;border-bottom:1px solid #e2eef6}
-  .mobile-nav-intro>span{color:#005FAE;font-size:9px;font-weight:800;letter-spacing:1.3px}
+  .mobile-nav-intro>span{color:#064b54;font-size:9px;font-weight:800;letter-spacing:1.3px}
   .mobile-nav-intro small{color:#688198;font-size:10px}
   .site-nav>a.site-nav-link{display:grid;grid-template-columns:31px minmax(0,1fr) 19px;align-items:center;gap:10px;min-height:54px;padding:6px 9px;border:1px solid transparent;border-radius:11px;background:transparent;color:#274d69;font-size:13px;font-weight:650;transition:background .18s,border-color .18s,color .18s,transform .18s}
-  .site-nav>a.site-nav-link:hover,.site-nav>a.site-nav-link.active{border-color:#d7eaf6;background:#f0f8fd;color:#005FAE}
+  .site-nav>a.site-nav-link:hover,.site-nav>a.site-nav-link.active{border-color:#d7eaf6;background:#f0f8fd;color:#064b54}
   .site-nav>a.site-nav-link:active{transform:scale(.99)}
   .site-nav .active:not(.nav-cta):after{display:none}
   .nav-mobile-index{display:grid;place-items:center;width:28px;height:28px;border:1px solid #d9ebf6;border-radius:9px;background:#f3f9fd;color:#5796bd;font-family:Manrope,system-ui,sans-serif;font-size:9px;font-weight:800}
-  .site-nav>a.site-nav-link.active .nav-mobile-index{border-color:#b9dff2;background:#e2f3fc;color:#005FAE}
+  .site-nav>a.site-nav-link.active .nav-mobile-index{border-color:#b9dff2;background:#e2f3fc;color:#064b54}
   .nav-link-label{min-width:0}
   .nav-mobile-arrow{display:block;color:#8bb6d0}
-  .site-nav .nav-cta{display:flex;justify-content:center;min-height:48px;margin-top:5px;padding:0 15px;border-radius:10px;background:linear-gradient(110deg,#123b64,#005FAE);font-size:12px;box-shadow:0 7px 16px rgba(0,95,174,.16)}
+  .site-nav .nav-cta{display:flex;justify-content:center;min-height:48px;margin-top:5px;padding:0 15px;border-radius:10px;background:linear-gradient(110deg,#123f49,#064b54);font-size:12px;box-shadow:0 7px 16px rgba(0,95,174,.16)}
   .mobile-nav-footer{display:flex;align-items:flex-start;gap:7px;padding:9px 5px 1px;color:#74899b;font-size:9px;line-height:1.5}
   .mobile-nav-footer svg{flex:none;color:#1687b5}
   .mobile-menu-open{overflow:hidden}
@@ -482,7 +484,7 @@ h1,h2,h3,.brand{font-family:Manrope,system-ui,sans-serif}
 .hero-photo{position:relative;isolation:isolate;justify-self:center;width:min(440px,91%);height:485px;margin:0;overflow:hidden;border:7px solid #fff;border-radius:230px 230px 22px 22px;background:#dceef8;box-shadow:0 28px 70px rgba(18,59,100,.16)}
 .hero-photo:before{content:"";position:absolute;inset:12px;z-index:1;border:1px solid rgba(255,255,255,.66);border-radius:215px 215px 15px 15px;pointer-events:none}
 .hero-photo img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 42%}
-.hero-photo figcaption{position:absolute;z-index:2;left:50%;bottom:22px;display:flex;align-items:center;gap:8px;width:max-content;max-width:calc(100% - 32px);padding:11px 15px;border:1px solid rgba(255,255,255,.8);border-radius:999px;background:rgba(255,255,255,.94);color:#123b64;font-size:10px;font-weight:800;letter-spacing:.9px;text-transform:uppercase;transform:translateX(-50%);box-shadow:0 6px 20px rgba(18,59,100,.12)}
+.hero-photo figcaption{position:absolute;z-index:2;left:50%;bottom:22px;display:flex;align-items:center;gap:8px;width:max-content;max-width:calc(100% - 32px);padding:11px 15px;border:1px solid rgba(255,255,255,.8);border-radius:999px;background:rgba(255,255,255,.94);color:#123f49;font-size:10px;font-weight:800;letter-spacing:.9px;text-transform:uppercase;transform:translateX(-50%);box-shadow:0 6px 20px rgba(18,59,100,.12)}
 .hero-photo figcaption svg{color:#0877b8}
 .periodontal-photo-section{margin:54px 0 62px;padding:35px;border:1px solid #d9eaf5;border-radius:20px;background:linear-gradient(140deg,#f2f9fd,#fff 62%,#eaf5fc)}
 .periodontal-photo-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:17px;margin-top:21px}
@@ -490,7 +492,7 @@ h1,h2,h3,.brand{font-family:Manrope,system-ui,sans-serif}
 .periodontal-photo-card img{display:block;width:100%;aspect-ratio:1.7/1;object-fit:cover;object-position:center 48%;background:#e8eef2}
 .periodontal-photo-card:first-child img,.condition-card:first-child .condition-photo{object-position:center 50%}
 .periodontal-photo-card figcaption{display:flex;flex-direction:column;gap:4px;padding:13px 15px}
-.periodontal-photo-card figcaption strong{color:#123b64;font-size:12px}
+.periodontal-photo-card figcaption strong{color:#123f49;font-size:12px}
 .periodontal-photo-card figcaption span{color:#61788c;font-size:10px;line-height:1.5}
 .clinical-image-note{display:flex;align-items:flex-start;gap:8px;margin:15px 0 0;color:#526d82;font-size:10px;line-height:1.6}
 .clinical-image-note svg{flex:none;color:#0877b8}
@@ -502,7 +504,7 @@ h1,h2,h3,.brand{font-family:Manrope,system-ui,sans-serif}
 .faq-support-photo{display:block;width:100%;height:184px;object-fit:cover;object-position:center 37%;margin:0 0 20px;border:1px solid #cfe3f1;border-radius:13px}
 .contact-photo{position:relative;min-height:340px;margin:0;overflow:hidden;border-radius:15px;background:#dfeef8}
 .contact-photo img{display:block;width:100%;height:100%;min-height:340px;object-fit:cover;object-position:center 35%}
-.contact-photo figcaption{position:absolute;right:13px;bottom:13px;max-width:calc(100% - 26px);padding:9px 12px;border:1px solid rgba(255,255,255,.8);border-radius:999px;background:rgba(255,255,255,.94);color:#123b64;font-size:10px;font-weight:700}
+.contact-photo figcaption{position:absolute;right:13px;bottom:13px;max-width:calc(100% - 26px);padding:9px 12px;border:1px solid rgba(255,255,255,.8);border-radius:999px;background:rgba(255,255,255,.94);color:#123f49;font-size:10px;font-weight:700}
 .contact-panel{grid-template-columns:1fr 1fr;gap:37px;align-items:center}
 .account-story{isolation:isolate;background:none}
 .account-story-photo{position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover;object-position:center 38%;opacity:.37}
@@ -520,7 +522,7 @@ h1,h2,h3,.brand{font-family:Manrope,system-ui,sans-serif}
 .topic-featured .topic-image{object-position:center 35%}
 .topic-alert .topic-image{object-position:center 50%}
 .topic-card:hover .topic-image{transform:scale(1.035)}
-.topic-image-caption{position:absolute;right:10px;bottom:10px;max-width:calc(100% - 20px);padding:6px 9px;border:1px solid rgba(255,255,255,.8);border-radius:999px;background:rgba(255,255,255,.94);color:#123b64;font-size:9px;font-weight:700;line-height:1.3}
+.topic-image-caption{position:absolute;right:10px;bottom:10px;max-width:calc(100% - 20px);padding:6px 9px;border:1px solid rgba(255,255,255,.8);border-radius:999px;background:rgba(255,255,255,.94);color:#123f49;font-size:9px;font-weight:700;line-height:1.3}
 .topic-card-content{display:flex;flex:1;flex-direction:column;align-items:flex-start;padding:18px 21px 20px}
 .topic-card-meta{display:flex;width:100%;align-items:center;justify-content:space-between;gap:12px}
 .topic-card-meta .topic-icon{flex:none}
@@ -536,7 +538,7 @@ h1,h2,h3,.brand{font-family:Manrope,system-ui,sans-serif}
 .not-found-layout{display:grid;width:100%;grid-template-columns:1fr .85fr;gap:54px;align-items:center}
 .not-found-photo{position:relative;overflow:hidden;margin:0;border:6px solid #fff;border-radius:165px 165px 14px 14px;background:#eaf4fb;box-shadow:0 18px 45px rgba(18,59,100,.12)}
 .not-found-photo img{display:block;width:100%;height:335px;object-fit:cover;object-position:center 40%}
-.not-found-photo figcaption{position:absolute;right:12px;bottom:12px;padding:8px 11px;border:1px solid rgba(255,255,255,.8);border-radius:999px;background:rgba(255,255,255,.95);color:#123b64;font-size:9px;font-weight:700}
+.not-found-photo figcaption{position:absolute;right:12px;bottom:12px;padding:8px 11px;border:1px solid rgba(255,255,255,.8);border-radius:999px;background:rgba(255,255,255,.95);color:#123f49;font-size:9px;font-weight:700}
 @media(max-width:760px){.privacy-photo-note{grid-template-columns:1fr;gap:14px;padding:13px}.privacy-photo-note img{height:185px}.not-found-layout{grid-template-columns:1fr;gap:29px}.not-found-photo{width:min(390px,100%);justify-self:center}.not-found-photo img{height:300px}}
 .home-photo-stories{padding-bottom:92px}
 .home-photo-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
@@ -544,16 +546,139 @@ h1,h2,h3,.brand{font-family:Manrope,system-ui,sans-serif}
 .home-photo-card img{display:block;width:100%;height:100%;min-height:250px;object-fit:cover;object-position:center 42%}
 .home-photo-card>div{display:flex;flex-direction:column;align-items:flex-start;padding:23px 21px}
 .home-photo-card .section-kicker{font-size:8px;letter-spacing:1.1px}
-.home-photo-card h3{margin:12px 0;color:#123b64;font-size:22px;line-height:1.22;letter-spacing:-.6px}
-.home-photo-card a{display:inline-flex;align-items:center;gap:7px;margin-top:auto;padding-top:13px;color:#005FAE;font-size:10px;font-weight:700}
+.home-photo-card h3{margin:12px 0;color:#123f49;font-size:22px;line-height:1.22;letter-spacing:-.6px}
+.home-photo-card a{display:inline-flex;align-items:center;gap:7px;margin-top:auto;padding-top:13px;color:#064b54;font-size:10px;font-weight:700}
 .periodontal-evaluation-photo,.interdental-photo-card,.signals-evaluation-photo{display:grid;grid-template-columns:minmax(0,.9fr) 1.1fr;gap:30px;align-items:center;margin:36px 0 56px;padding:18px;border:1px solid #d9eaf5;border-radius:17px;background:linear-gradient(135deg,#f2f9fd,#fff 70%);box-shadow:0 11px 28px rgba(18,59,100,.05)}
 .periodontal-evaluation-photo figure,.interdental-photo-card figure,.signals-evaluation-photo figure{position:relative;overflow:hidden;margin:0;border-radius:11px;background:#e7f2f9}
 .periodontal-evaluation-photo img,.interdental-photo-card img,.signals-evaluation-photo img{display:block;width:100%;height:270px;object-fit:cover;object-position:center 42%}
 .interdental-photo-card img{object-position:center 46%}
 .signals-evaluation-photo img{object-position:center 35%}
-.periodontal-evaluation-photo figcaption,.interdental-photo-card figcaption,.signals-evaluation-photo figcaption{position:absolute;right:10px;bottom:10px;max-width:calc(100% - 20px);padding:7px 10px;border:1px solid rgba(255,255,255,.8);border-radius:999px;background:rgba(255,255,255,.95);color:#123b64;font-size:9px;font-weight:700}
+.periodontal-evaluation-photo figcaption,.interdental-photo-card figcaption,.signals-evaluation-photo figcaption{position:absolute;right:10px;bottom:10px;max-width:calc(100% - 20px);padding:7px 10px;border:1px solid rgba(255,255,255,.8);border-radius:999px;background:rgba(255,255,255,.95);color:#123f49;font-size:9px;font-weight:700}
 .periodontal-evaluation-photo>div,.interdental-photo-card>div,.signals-evaluation-photo>div{padding:8px 15px 8px 0}
-.periodontal-evaluation-photo h2,.interdental-photo-card h2,.signals-evaluation-photo h2{margin:12px 0 9px;color:#123b64;font-family:Manrope,system-ui,sans-serif;font-size:clamp(25px,3vw,34px);line-height:1.13;letter-spacing:-1px}
+.periodontal-evaluation-photo h2,.interdental-photo-card h2,.signals-evaluation-photo h2{margin:12px 0 9px;color:#123f49;font-family:Manrope,system-ui,sans-serif;font-size:clamp(25px,3vw,34px);line-height:1.13;letter-spacing:-1px}
 .periodontal-evaluation-photo p,.interdental-photo-card p,.signals-evaluation-photo p{margin:0;color:#5e7182;font-size:13px;line-height:1.8}
 .periodontal-evaluation-photo .text-link,.interdental-photo-card .text-link,.signals-evaluation-photo .text-link{margin-top:18px}
 @media(max-width:760px){.home-photo-stories{padding-bottom:68px}.home-photo-grid{grid-template-columns:1fr;gap:13px}.home-photo-card{grid-template-columns:1fr;min-height:0}.home-photo-card img{height:205px;min-height:205px}.home-photo-card>div{min-height:195px;padding:19px}.home-photo-card h3{font-size:21px}.periodontal-evaluation-photo,.interdental-photo-card,.signals-evaluation-photo{grid-template-columns:1fr;gap:15px;margin:28px 0 42px;padding:12px;border-radius:13px}.periodontal-evaluation-photo img,.interdental-photo-card img,.signals-evaluation-photo img{height:210px}.periodontal-evaluation-photo>div,.interdental-photo-card>div,.signals-evaluation-photo>div{padding:5px 7px 9px}.periodontal-evaluation-photo h2,.interdental-photo-card h2,.signals-evaluation-photo h2{font-size:27px}}
+
+/* Larger imagery and type for the older-adult audience. */
+.hero{grid-template-columns:.88fr 1.12fr;min-height:700px}
+.hero-photo{width:min(510px,96%);height:540px}
+.hero-photo img{object-position:center 36%}
+.hero-photo figcaption{font-size:12px;letter-spacing:.5px}
+.eyebrow,.section-kicker{font-size:12px;letter-spacing:1.1px}
+.site-nav{font-size:15px}
+.button{min-height:54px;font-size:15px}
+.text-link{font-size:15px}
+.hero-lede,.welcome-grid>p,.section-title-row>p,.topic-card-content p,.member-intro>p,.page-heading>p,.article-content>p,.progress-steps p,.brushing-stage-copy p,.routine-list p,.interdental-photo-card p,.signal-row p,.consult-card p,.condition-card-content>p,.faq-page-intro p,.faq-list details p,.contact-panel-copy>p,.privacy-notice-card p{font-size:17px;line-height:1.78}
+.hero-note{font-size:13px}
+.topic-number{font-size:11px}
+.topic-card-content p{max-width:310px}
+.topic-link{font-size:13px}
+.member-tool b{font-size:16px}
+.member-tool small{font-size:14px}
+.periodontal-photo-card figcaption strong{font-size:14px}
+.periodontal-photo-card figcaption span{font-size:12px}
+.brushing-stage-tag,.condition-figure-caption{font-size:11px}
+.signal-row h2{font-size:18px}
+.faq-list summary{font-size:16px}
+.clinical-image-note,.condition-source-note,.brushing-personal-note,.source-note{font-size:12px;line-height:1.7}
+.topic-image-caption{font-size:11px}
+.home-photo-card h3{font-size:24px}
+.home-photo-card a{font-size:14px}
+.periodontal-evaluation-photo,.interdental-photo-card,.signals-evaluation-photo{grid-template-columns:1.12fr .88fr}
+.periodontal-evaluation-gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.periodontal-evaluation-gallery figure{min-width:0}
+.periodontal-evaluation-gallery img{height:270px;object-position:center 40%}
+.periodontal-evaluation-gallery figcaption{right:7px;bottom:7px;padding:6px 8px;font-size:10px}
+.senior-routine-photo{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center;margin:0 0 43px;padding:17px;border:1px solid #d9eaf5;border-radius:16px;background:#f3f9fd}
+.senior-routine-photo figure{position:relative;overflow:hidden;margin:0;border-radius:11px;background:#e7f2f9}
+.senior-routine-photo img{display:block;width:100%;height:310px;object-fit:cover;object-position:center 35%}
+.senior-routine-photo figcaption{position:absolute;right:10px;bottom:10px;padding:7px 10px;border:1px solid rgba(255,255,255,.8);border-radius:999px;background:rgba(255,255,255,.95);color:#123f49;font-size:11px;font-weight:700}
+.senior-routine-photo>div{padding:9px 22px 9px 0}
+.senior-routine-photo h2{margin:14px 0 10px;color:#123f49;font-family:Manrope,system-ui,sans-serif;font-size:clamp(28px,3.2vw,38px);line-height:1.12;letter-spacing:-1.2px}
+.senior-routine-photo p{margin:0;color:#526d82;font-size:17px;line-height:1.8}
+@media(max-width:1000px){.hero{grid-template-columns:.95fr 1.05fr;min-height:650px}.hero-photo{width:min(470px,96%);height:500px}}
+@media(max-width:760px){
+  .hero{min-height:unset}
+  .hero-photo{width:min(420px,100%);height:360px;margin-top:17px}
+  .eyebrow,.section-kicker{font-size:11px;letter-spacing:.9px}
+  .site-nav{font-size:16px}
+  .hero-lede,.welcome-grid>p,.section-title-row>p,.topic-card-content p,.member-intro>p,.page-heading>p,.article-content>p,.progress-steps p,.brushing-stage-copy p,.routine-list p,.interdental-photo-card p,.signal-row p,.consult-card p,.condition-card-content>p,.faq-page-intro p,.faq-list details p,.contact-panel-copy>p,.privacy-notice-card p,.senior-routine-photo p{font-size:16px;line-height:1.75}
+  .hero-note{font-size:13px}
+  .button,.text-link{font-size:15px}
+  .topic-number{font-size:11px}
+  .topic-link,.home-photo-card a{font-size:14px}
+  .member-tool b{font-size:16px}
+  .member-tool small{font-size:14px}
+  .faq-list summary{font-size:16px}
+  .clinical-image-note,.condition-source-note,.brushing-personal-note,.source-note{font-size:12px}
+  .periodontal-evaluation-gallery{grid-template-columns:1fr}
+  .periodontal-evaluation-gallery img{height:220px}
+  .periodontal-evaluation-gallery figcaption{font-size:11px}
+  .senior-routine-photo{grid-template-columns:1fr;gap:16px;margin:0 0 35px;padding:12px;border-radius:13px}
+  .senior-routine-photo img{height:245px}
+  .senior-routine-photo>div{padding:4px 7px 9px}
+  .senior-routine-photo h2{font-size:29px}
+}
+
+.periodontal-photo-section{border-color:#72afb7;background:#a9d4d9}
+.periodontal-evaluation-photo{border-color:#72afb7;background:#a9d4d9;box-shadow:0 11px 28px rgba(18,59,100,.08)}
+.periodontal-evaluation-photo p,.periodontal-photo-section .clinical-image-note{color:#25464d}
+.periodontitis-visit-gallery{margin:0 0 56px;padding:32px;border:1px solid #72afb7;border-radius:17px;background:#a9d4d9}
+.periodontitis-visit-gallery .section-title-row{margin-bottom:22px}
+.periodontitis-visit-gallery .section-title-row>p{color:#25464d}
+.periodontitis-visit-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.periodontitis-visit-card{display:grid;grid-template-columns:.9fr 1.1fr;min-height:220px;overflow:hidden;margin:0;border:1px solid #72afb7;border-radius:13px;background:#d1e8ea}
+.periodontitis-visit-card img{display:block;width:100%;height:100%;min-height:220px;object-fit:cover;object-position:center 40%}
+.periodontitis-visit-card figcaption{display:flex;flex-direction:column;justify-content:center;gap:9px;padding:20px;color:#123f49}
+.periodontitis-visit-card strong{font-size:17px;line-height:1.3}
+.periodontitis-visit-card span{color:#25464d;font-size:15px;line-height:1.65}
+@media(max-width:760px){
+  .periodontitis-visit-gallery{margin-bottom:42px;padding:17px;border-radius:14px}
+  .periodontitis-visit-grid{grid-template-columns:1fr;gap:13px}
+  .periodontitis-visit-card{min-height:185px}
+  .periodontitis-visit-card img{min-height:185px}
+}
+@media(max-width:480px){
+  .periodontitis-visit-card{grid-template-columns:1fr}
+  .periodontitis-visit-card img{height:190px;min-height:190px}
+  .periodontitis-visit-card figcaption{padding:15px}
+}
+
+.progress-section{margin:54px 0 30px;padding:36px;border:1px solid #72afb7;border-radius:18px;background:#87bbc2}
+.progress-section .section-title-row{margin-bottom:25px}
+.progress-section .section-title-row>p{color:#25464d}
+.progress-steps{gap:18px}
+.progress-steps article{padding:0;overflow:hidden;border:1px solid #72afb7;border-top:1px solid #72afb7;border-radius:14px;background:#d1e8ea;box-shadow:0 9px 22px rgba(18,63,73,.09)}
+.progress-step-image{display:block;width:100%;height:190px;object-fit:cover;object-position:center 44%}
+.progress-step-copy{padding:18px 20px 21px}
+.progress-step-copy>span{display:inline-flex;align-items:center;justify-content:center;min-width:34px;min-height:34px;border-radius:50%;background:#064b54;color:#fff;font-family:var(--serif);font-size:15px;font-style:normal;font-weight:700}
+.progress-step-copy h3{margin:12px 0 8px;color:#123f49;font-size:19px}
+.progress-step-copy p{max-width:none;color:#25464d;font-size:15px;line-height:1.7}
+@media(max-width:760px){
+  .site-nav{background:#b5dce0;border-bottom-color:#72afb7}
+  .progress-section{margin:42px 0 25px;padding:20px;border-radius:15px}
+  .progress-steps{gap:15px}
+  .progress-step-image{height:205px}
+  .progress-step-copy{padding:17px}
+  .progress-step-copy p{font-size:16px}
+}
+
+/* Shared turquoise surface for all informational cards. */
+.topic-card,
+.today-card,.week-card,.side-card,.clinic-table-card,
+.loading-panel,.empty-state,.booking-card,.clinic-stats article,
+.patient-photo-tip,.clinic-care-photo-note,.privacy-notice-card,.profile-card,
+.brushing-stage-card,.condition-card,.periodontal-photo-card,.home-photo-card,
+.booking-profile-card,.clinic-profile-card,.appointment-access-card,.booking-personal-fields,
+.timer-panel,.timer-display,.contact-panel,.contact-section,
+.hygiene-video-card,.privacy-photo-note,.senior-routine-photo,
+.periodontal-photo-section,.periodontal-evaluation-photo,.interdental-photo-card,.signals-evaluation-photo,
+.periodontitis-visit-gallery,.periodontitis-visit-card,.progress-steps article,
+.booking-step,.booking-date-option,.booking-time-option,.appointment-upload,.appointment-photo-preview,
+.profile-card-heading{
+  background:var(--card-surface);
+  border-color:var(--card-border);
+}
+.topic-featured{background:var(--card-surface);color:#123f49}
+.topic-featured .topic-icon{color:#064b54;background:#d1e8ea;border-color:var(--card-border)}
